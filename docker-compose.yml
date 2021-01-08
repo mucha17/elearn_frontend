@@ -1,0 +1,29 @@
+version: "3.8"
+networks:
+  network_kniotes_elearn:
+    driver: bridge
+  webproxy:
+    external: true
+services:
+  elearn_frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_KEYCLOAK_REALM: kniotes
+        REACT_APP_KEYCLOAK_URL: https://auth.kniotes.pl/auth/
+        REACT_APP_KEYCLOAK_CLIENT_ID: elearn
+    container_name: nginx-elearn-frontend
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 3011:80
+    environment:
+      VIRTUAL_HOST: elearn.kniotes.pl
+      VIRTUAL_PORT: 3011
+      PROXY_ADDRESS_FORWARDING: "true"
+      LETSENCRYPT_HOST: elearn.kniotes.pl
+      LETSENCRYPT_EMAIL: system@kniotes.pl
+    networks:
+      - network_kniotes_elearn
+      - webproxy
