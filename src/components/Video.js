@@ -4,9 +4,7 @@ import Tile from "./Tile";
 const Video = ({ src, title }) => {
 	return (
 		<Tile title={title}>
-			<video width="100%" controls>
-				<source src={src} />
-			</video>
+			<iframe width="100%" src={src} className={"video"} />
 		</Tile>
 	);
 };

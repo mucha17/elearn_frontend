@@ -7,6 +7,7 @@ import MenuLeftItem from "./MenuLeftItem";
 const MenuLeft = ({ items, match }) => {
 	const { name } = match.params;
 	const [showMenu, switchMenu] = useState(false);
+	const isMobile = window.innerWidth < 768;
 
 	return (
 		<>
@@ -20,37 +21,41 @@ const MenuLeft = ({ items, match }) => {
 					<div className={"menu-show-row third"} />
 				</div>
 			</Mobile>
-			<nav className={`menu-left ${showMenu ? "show" : "hide"}`}>
-				<Mobile>
-					{items_top.map((item) => (
-						<MenuLeftItem
-							key={item.id}
-							name={item.name}
-							to={item.to}
-							action={item.action}
-							condition={item.condition}
-						/>
-					))}
-				</Mobile>
-				<NavLink to={"/courses"}>
-					<div className={"menu-left-item"}>Wszystkie kursy</div>
-				</NavLink>
-				{name && (
-					<NavLink to={`/courses/${name}`}>
-						<div className={"menu-left-item"}>Moduły ({name})</div>
+			{(isMobile || items) && (
+				<nav className={`menu-left ${showMenu ? "show" : "hide"}`}>
+					<Mobile>
+						{items_top.map((item) => (
+							<MenuLeftItem
+								key={item.id}
+								name={item.name}
+								to={item.to}
+								action={item.action}
+								condition={item.condition}
+							/>
+						))}
+					</Mobile>
+					<NavLink to={"/courses"}>
+						<div className={"menu-left-item"}>Wszystkie kursy</div>
 					</NavLink>
-				)}
-				{items &&
-					items.map((item) => (
-						<MenuLeftItem
-							key={item.id}
-							name={item.name}
-							to={item.to}
-							action={item.action}
-							condition={item.condition}
-						/>
-					))}
-			</nav>
+					{name && (
+						<NavLink to={`/courses/${name}`}>
+							<div className={"menu-left-item"}>
+								Moduły ({name})
+							</div>
+						</NavLink>
+					)}
+					{items &&
+						items.map((item) => (
+							<MenuLeftItem
+								key={item.id}
+								name={item.name}
+								to={item.to}
+								action={item.action}
+								condition={item.condition}
+							/>
+						))}
+				</nav>
+			)}
 		</>
 	);
 };

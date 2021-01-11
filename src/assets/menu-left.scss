@@ -11,6 +11,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   padding: 3px;
+  background-color: #fff;
 }
 
 .menu-show-row {
@@ -26,12 +27,14 @@
     background-color: #fff;
 
     &.first {
-      transform: rotate(-45deg) scaleX(1.41)  translate(-5px, 6px);
+      transform: rotate(-45deg) scaleX(1.41) translate(-5px, 6px);
     }
+
     &.second {
       transform-origin: center;
       transform: scale(0);
     }
+
     &.third {
       transform: rotate(45deg) scaleX(1.41) translate(-4px, -6px);
     }

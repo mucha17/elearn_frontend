@@ -4,7 +4,7 @@ import Tile from "./Tile";
 const Image = ({ src, alt, title }) => {
 	return (
 		<Tile title={title}>
-			<img src={src} alt={alt} />
+			<img src={src} alt={alt} className={"image"} />
 		</Tile>
 	);
 };

@@ -9,7 +9,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
 
-  @include absoluteMinimum{
+  @include absoluteMinimum {
     display: none;
   }
 }
@@ -43,6 +43,21 @@ a {
   &:hover {
     background-color: seagreen;
   }
+}
+
+.video {
+  border: 0;
+  width: calc(100vw - 20px);
+  height: calc((100vw - 20px) * 0.4);
+
+  @include mobileMax {
+    height: calc((100vw - 20px) * 0.6);
+  }
+}
+
+.image {
+  width: 100%;
+  height: auto;;
 }
 
 @import "./item-tile";
