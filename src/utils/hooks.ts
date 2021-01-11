@@ -9,18 +9,18 @@ export const useAxios = (baseURL: string) => {
 	const { keycloak, initialized } = useKeycloak();
 	const kcToken = keycloak?.token ?? "";
 
-	useEffect(() => {
-		axiosInstance.current = axios.create({
-			baseURL,
-			headers: {
-				Authorization: initialized ? `Bearer ${kcToken}` : undefined,
-			},
-		});
-
-		return () => {
-			axiosInstance.current = undefined;
-		};
-	}, [baseURL, initialized, kcToken]);
+	// useEffect(() => {
+	// 	axiosInstance.current = axios.create({
+	// 		baseURL,
+	// 		headers: {
+	// 			Authorization: initialized ? `Bearer ${kcToken}` : undefined,
+	// 		},
+	// 	});
+	//
+	// 	return () => {
+	// 		axiosInstance.current = undefined;
+	// 	};
+	// }, [baseURL, initialized, kcToken]);
 
 	return axiosInstance;
 };

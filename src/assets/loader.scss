@@ -1,0 +1,15 @@
+.loader-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  border: 1px solid silver;
+  box-shadow: 0 0 3px 1px silver;
+  padding:10px;
+  text-align: center;
+  border-radius: 10px;
+}

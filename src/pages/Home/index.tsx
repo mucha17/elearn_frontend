@@ -1,5 +1,7 @@
 import React from "react";
 import strings from "./strings";
+import Image from "../../components/Image";
+import Video from "../../components/Video";
 
 const HomePage = (): JSX.Element => {
 	const selectedLanguage =
@@ -8,18 +10,17 @@ const HomePage = (): JSX.Element => {
 
 	return (
 		<div>
-			<h1>View Video</h1>
-			<video width="400" controls>
-				<source
-					src={
-						"http://localhost:8080/api/videos/5ff7b64b8438804e301f9af8"
-					}
-				/>
-			</video>
-			<h1>View Image</h1>
-			<img
+			<Video
 				src={
-					"http://localhost:8080/api/images/5ff7c6403c807b6f48590c1f"
+					"http://localhost:8080/api/videos/5ff7b64b8438804e301f9af8"
+				}
+				title={"Video"}
+			/>
+			<Image
+				title={"Image"}
+				alt={"image"}
+				src={
+					"https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png"
 				}
 			/>
 		</div>
