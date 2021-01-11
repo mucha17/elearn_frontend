@@ -1,0 +1,26 @@
+.menu-left {
+  width: 200px;
+  height: 100vh;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 3px 1px silver;
+}
+
+.menu-left-item {
+  width: 100%;
+  color: #000;
+  padding: 3px 10px 2px;
+  background-color: #fff;
+  border-left: 3px solid #fff;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &:hover {
+    border-color: lime;
+  }
+
+  &:active {
+    border-color: royalblue;
+  }
+}

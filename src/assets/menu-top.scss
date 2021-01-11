@@ -1,0 +1,29 @@
+.menu-left {
+  min-width: 200px;
+  max-width: 200px;
+  height: 100vh;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 3px 1px silver;
+}
+
+.menu-left-item {
+  width: 100%;
+  color: #000;
+  padding: 3px 10px;
+  background-color: #fff;
+  border-left: 3px solid #fff;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  .active & {
+    border-color: royalblue;
+    background-color: rgba(royalblue, 0.2);
+  }
+
+  &:hover {
+    border-color: lime;
+    background-color: rgba(lime, 0.2);
+  }
+}

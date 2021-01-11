@@ -6,7 +6,8 @@ import { useKeycloak } from "@react-keycloak/web";
 import { PrivateRoute } from "./utils";
 import HomePage from "../pages/Home";
 import NotFoundPage from "../pages/NotFound";
-
+import Layout from "../components/Layout";
+import { routes } from "./data";
 /*
 
   Access Levels:
@@ -25,8 +26,17 @@ export const AppRouter = (): JSX.Element => {
 
 	return (
 		<Switch>
+			{routes.map((route) => (
+				<Route
+					exact
+					path={route.to}
+					component={(props) => <route.component {...props} />}
+				/>
+			))}
 			<Route exact path={"/home"}>
-				<HomePage />
+				<Layout header={"home"}>
+					<HomePage />
+				</Layout>
 			</Route>
 			<Route exact={true} path={"/cos"}>
 				<HomePage />

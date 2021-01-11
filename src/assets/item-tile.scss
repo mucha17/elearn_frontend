@@ -1,0 +1,14 @@
+.course-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-description {
+  width: 100%;
+  text-align: justify;
+  max-height: 107px;
+  min-height: 20px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
