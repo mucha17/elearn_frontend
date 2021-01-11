@@ -1,15 +1,53 @@
-@import "./assets";
+@import "./_media";
 
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+
+  @include absoluteMinimum{
+    display: none;
+  }
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }
+
+* {
+  text-decoration: none;
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+}
+
+a {
+  color: #000;
+}
+
+
+.link {
+  margin-left: auto;
+  background-color: royalblue;
+  padding: 3px 7px 4px;
+  border-radius: 5px;
+  margin-top: 5px;
+
+  a {
+    color: #fff;
+  }
+
+  &:hover {
+    background-color: seagreen;
+  }
+}
+
+@import "./item-tile";
+@import "./loader";
+@import "./layout";
+@import "./menu-left";
+@import "./menu-top";
+@import "./tile";

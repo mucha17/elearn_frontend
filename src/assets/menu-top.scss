@@ -1,19 +1,21 @@
-.menu-left {
-  min-width: 200px;
-  max-width: 200px;
-  height: 100vh;
-  background-color: #eee;
+.menu-top {
+  width: 100vw;
+  height: 30px;
   display: flex;
-  flex-direction: column;
-  box-shadow: 0 0 3px 1px silver;
+  background-color: #eee;
+  z-index: 1;
+  justify-content: flex-end;
+
+  @include mobileMax{
+    display:none;
+  }
 }
 
-.menu-left-item {
-  width: 100%;
+.menu-top-item {
   color: #000;
   padding: 3px 10px;
-  background-color: #fff;
-  border-left: 3px solid #fff;
+  background-color: #FFF;
+  border-bottom: 3px solid #fff;
   box-sizing: border-box;
   cursor: pointer;
 

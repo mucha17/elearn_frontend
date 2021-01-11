@@ -1,0 +1,33 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+.site-title {
+  margin:0 0 15px 0;
+  text-transform: uppercase;
+  border-bottom: 1px solid silver;
+}
+
+.content-wrapper {
+  box-shadow: inset 0 0 3px 1px silver;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  height:calc(100vh - 30px);
+
+  @include  mobileMax{
+    height:100vh;
+  }
+}
+
+.content-wrapper-small {
+  display: flex;
+  flex-wrap: wrap;
+}

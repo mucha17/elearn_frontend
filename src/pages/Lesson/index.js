@@ -2,19 +2,27 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../../components/Layout";
 
-class Course extends React.Component {
+class Lesson extends React.Component {
 	render() {
-		const { name } = this.props.match.params;
+		const { name, module, lesson } = this.props.match.params;
 		const leftMenu = [
 			{
 				id: 0,
-				name: "Java",
-				to: "/courses/java",
+				name: "Lesson 1",
+				to: "/courses/java/ee/0",
 			},
 		];
 
-		return <Layout title={name} smallTiles leftMenu={leftMenu}></Layout>;
+		return (
+			<Layout
+				title={`${name} - ${module} - ${lesson}`}
+				smallTiles
+				leftMenu={leftMenu}
+			>
+				Ls
+			</Layout>
+		);
 	}
 }
 
-export default withRouter(Course);
+export default withRouter(Lesson);

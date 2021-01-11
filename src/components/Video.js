@@ -1,12 +1,14 @@
 import React from "react";
 import Tile from "./Tile";
 
-const Image = ({ src, alt, title }) => {
+const Video = ({ src, title }) => {
 	return (
 		<Tile title={title}>
-			<img src={src} alt={alt} />
+			<video width="100%" controls>
+				<source src={src} />
+			</video>
 		</Tile>
 	);
 };
 
-export default Image;
+export default Video;

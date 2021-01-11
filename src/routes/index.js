@@ -17,7 +17,7 @@ import { routes } from "./data";
 
  */
 
-export const AppRouter = (): JSX.Element => {
+export const AppRouter = () => {
 	const { keycloak } = useKeycloak();
 
 	const userRoles = keycloak.tokenParsed
@@ -28,9 +28,10 @@ export const AppRouter = (): JSX.Element => {
 		<Switch>
 			{routes.map((route) => (
 				<Route
-					exact
+					key={route.id}
+					exact={route.exact}
 					path={route.to}
-					component={(props) => <route.component {...props} />}
+					component={() => route.component}
 				/>
 			))}
 			<Route exact path={"/home"}>

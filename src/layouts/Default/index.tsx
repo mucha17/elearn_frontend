@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "moment/locale/pl";
 import strings from "./strings";
 import { useKeycloak } from "@react-keycloak/web";
-import { AppRouter } from "../../routes";
+import { AppRouter } from "../../routes/index";
 
 const AppLayout = (): JSX.Element => {
 	const { initialized } = useKeycloak();
@@ -11,20 +11,18 @@ const AppLayout = (): JSX.Element => {
 		localStorage.getItem("selectedLanguage")?.toString() ?? "pl";
 	strings.setLanguage(selectedLanguage ?? "pl");
 
-	if (!initialized) {
-		return (
-			<div>
-				<p>{strings.pleaseWait}</p>
-				<p>{strings.connecting}</p>
-			</div>
-		);
-	}
+	// if (!initialized) {
+	// 	return (
+	// 		<div className="loader-wrapper">
+	// 			<div className="loader">
+	// 				<p>{strings.pleaseWait}</p>
+	// 				<p>{strings.connecting}</p>
+	// 			</div>
+	// 		</div>
+	// 	);
+	// }
 
-	return (
-		<div>
-			<AppRouter />
-		</div>
-	);
+	return <AppRouter />;
 };
 
 export default AppLayout;

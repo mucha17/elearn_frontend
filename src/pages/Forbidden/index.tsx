@@ -1,5 +1,6 @@
 import React from "react";
 import strings from "./strings";
+import { NavLink } from "react-router-dom";
 
 interface ForbiddenPageParams {
 	onlyAuthenticated: boolean;
@@ -13,13 +14,18 @@ const ForbiddenPage = ({
 	strings.setLanguage(selectedLanguage ?? "pl");
 
 	return (
-		<div>
-			<h3>{strings.title}</h3>
-			<p>
-				{onlyAuthenticated
-					? strings.messages.requiresLogin
-					: strings.messages.noPermissions}
-			</p>
+		<div className="loader-wrapper">
+			<div className="loader">
+				<h3>{strings.title}</h3>
+				<p>
+					{onlyAuthenticated
+						? strings.messages.requiresLogin
+						: strings.messages.noPermissions}
+				</p>
+				<div className={"link"}>
+					<NavLink to={"/home"}>Powrót na stronę główną</NavLink>
+				</div>
+			</div>
 		</div>
 	);
 };

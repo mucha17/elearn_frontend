@@ -1,45 +1,21 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import MenuTopItem from "./MenuTopItem";
+import { top as items } from "../data/menu";
 
-const MenuLeft = () => {
-	// TODO: fetchowanie jakichs tam nadkursami
-	const Items = [
-		{
-			id: 0,
-			name: "Home",
-			to: "/home",
-		},
-		{
-			id: 1,
-			name: "Java",
-			to: "/java",
-		},
-		{
-			id: 2,
-			name: "PHP",
-			to: "/php",
-		},
-		{
-			id: 3,
-			name: "CSS",
-			to: "/css",
-		},
-		{
-			id: 4,
-			name: "HTML",
-			to: "/html",
-		},
-	];
-
+const MenuTop = () => {
 	return (
-		<nav className={"menu-left"}>
-			{Items.map((item) => (
-				<NavLink key={item.id} to={item.to}>
-					<div className={"menu-left-item"}>{item.name}</div>
-				</NavLink>
+		<nav className={"menu-top"}>
+			{items.map((item) => (
+				<MenuTopItem
+					key={item.id}
+					name={item.name}
+					to={item.to}
+					action={item.action}
+					condition={item.condition}
+				/>
 			))}
 		</nav>
 	);
 };
 
-export default MenuLeft;
+export default MenuTop;

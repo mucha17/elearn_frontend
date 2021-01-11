@@ -2,17 +2,29 @@ import React from "react";
 import Tile from "./Tile";
 import { NavLink } from "react-router-dom";
 
-const CourseTile = ({ title, description, url }) => {
+const ItemTile = ({ title, description, url, type }) => {
+	switch (type) {
+		case "lesson":
+			type = "lekcji";
+			break;
+		case "module":
+			type = "modułu";
+			break;
+		case "course":
+			type = "kursów";
+			break;
+	}
+
 	return (
 		<Tile title={title}>
-			<div className={"course-wrapper"}>
-				<p className={"course-description"}>{description}</p>
+			<div className={"item-wrapper"}>
+				<p className={"item-description"}>{description}</p>
 				<div className={"link"}>
-					<NavLink to={url}>Przejdź do kursu</NavLink>
+					<NavLink to={url}>Przejdź do {type}</NavLink>
 				</div>
 			</div>
 		</Tile>
 	);
 };
 
-export default CourseTile;
+export default ItemTile;
