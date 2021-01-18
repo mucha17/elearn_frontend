@@ -32,7 +32,7 @@ const Courses = () => {
     const items = leftMenu;
 
     return (
-        <Layout title={"Courses"} smallTiles leftMenu={leftMenu}>
+        <Layout header={{title: 'kursy', description: "Wszystkie kursy koła naukowego IoTes"}} title={"Courses"} smallTiles leftMenu={leftMenu}>
             {items.map(item => (
                 <ItemTile
                     title={item.name}

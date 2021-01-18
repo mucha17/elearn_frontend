@@ -42,6 +42,7 @@ class AdminModules extends React.Component {
 
 		return (
 			<Layout
+				header={{title: "Admin - moduły", description:"Strona admina do edycji i tworzenia modułów"}}
 				title="Admin - moduły"
 				smallTiles
 				leftMenu={leftMenu}

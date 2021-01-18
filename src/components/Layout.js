@@ -1,13 +1,17 @@
 import React from "react";
 import MenuLeft from "./MenuLeft";
 import MenuTop from "./MenuTop";
+import Header from "./Header";
+import Breadcrumbs from "./Breadcrumbs";
 
 const Layout = ({ children, header, title, smallTiles, leftMenu, hideAll }) => (
 	<div className={"layout"}>
+		<Header {...header} />
 		<MenuTop />
 		<div className={"content"}>
 			<MenuLeft items={leftMenu} hideAll={hideAll} />
 			<div className={"content-wrapper"}>
+				<Breadcrumbs />
 				{title && <h1 className={"site-title"}>{title}</h1>}
 				<div
 					className={`${smallTiles ? "content-wrapper-small" : null}`}

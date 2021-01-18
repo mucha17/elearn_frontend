@@ -24,7 +24,7 @@ class Admin extends React.Component {
 		];
 
 		return (
-			<Layout title="Admin" smallTiles leftMenu={leftMenu} hideAll>
+			<Layout title="Admin" header={{title: "Admin", description:"Strona admina"}} smallTiles leftMenu={leftMenu} hideAll>
 				<ItemTile
 					title={"Kursy"}
 					description={

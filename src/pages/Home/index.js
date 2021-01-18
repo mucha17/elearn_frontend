@@ -37,7 +37,7 @@ const HomePage = () => {
     ]
 
     return (
-        <Layout smallTiles>
+        <Layout smallTiles header={{title: "Główna", description: "Strona główna"}}>
             <Tile title={'Witaj'}>
                 Witamy na stronie KN Iotes
             </Tile>

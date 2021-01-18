@@ -69,6 +69,25 @@ a {
   height: auto;
 }
 
+.breadcrumbs-wrapper {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+  background-color: rgba(silver, 0.3);
+  border-radius: 3px;
+  border: 1px solid rgba(silver, 0.6);
+  padding: 5px 10px;
+  box-sizing: border-box;
+}
+
+.breadcrumb {
+  margin: 0 3px 0 0;
+
+  &:hover a {
+    color: #F00 !important;
+  }
+}
+
 @import "./form";
 @import "./home";
 @import "./item-tile";

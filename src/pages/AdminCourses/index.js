@@ -42,6 +42,7 @@ class AdminCourses extends React.Component {
 
 		return (
 			<Layout
+				header={{title: "Admin - kursy", description:"Strona admina ze wszystkimi kursami"}}
 				title="Admin - kursy"
 				smallTiles
 				leftMenu={leftMenu}
