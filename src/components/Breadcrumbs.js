@@ -3,11 +3,9 @@ import {NavLink} from "react-router-dom";
 
 const Breadcrumbs = () => {
     const url = window.location.href;
-    const crumbs = url.split("/");
-    // Deleting useless stuff
-    crumbs.shift();
-    crumbs.shift();
-    crumbs.shift();
+    const crumbs = url.replace(window.location.origin, "").split("/");
+
+    crumbs.shift()
     if (crumbs[crumbs.length - 1] === "") {
         crumbs.pop();
     }
