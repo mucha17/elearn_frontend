@@ -2,11 +2,11 @@ import React from "react";
 import MenuLeft from "./MenuLeft";
 import MenuTop from "./MenuTop";
 
-const Layout = ({ children, header, title, smallTiles, leftMenu }) => (
+const Layout = ({ children, header, title, smallTiles, leftMenu, hideAll }) => (
 	<div className={"layout"}>
 		<MenuTop />
 		<div className={"content"}>
-			<MenuLeft items={leftMenu} />
+			<MenuLeft items={leftMenu} hideAll={hideAll} />
 			<div className={"content-wrapper"}>
 				{title && <h1 className={"site-title"}>{title}</h1>}
 				<div

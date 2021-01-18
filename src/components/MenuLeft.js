@@ -4,7 +4,7 @@ import Mobile from "./Mobile";
 import { top as items, top as items_top } from "../data/menu";
 import MenuLeftItem from "./MenuLeftItem";
 
-const MenuLeft = ({ items, match }) => {
+const MenuLeft = ({ items, match, hideAll }) => {
 	const { name } = match.params;
 	const [showMenu, switchMenu] = useState(false);
 	const isMobile = window.innerWidth < 768;
@@ -34,9 +34,13 @@ const MenuLeft = ({ items, match }) => {
 							/>
 						))}
 					</Mobile>
-					<NavLink to={"/courses"}>
-						<div className={"menu-left-item"}>Wszystkie kursy</div>
-					</NavLink>
+					{!hideAll && (
+						<NavLink to={"/courses"}>
+							<div className={"menu-left-item"}>
+								Wszystkie kursy
+							</div>
+						</NavLink>
+					)}
 					{name && (
 						<NavLink to={`/courses/${name}`}>
 							<div className={"menu-left-item"}>

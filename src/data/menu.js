@@ -1,5 +1,10 @@
 export const top = [
 	{
+		id: -1,
+		name: "Admin",
+		to: "/admin",
+	},
+	{
 		id: 0,
 		name: "Kursy",
 		to: "/courses",

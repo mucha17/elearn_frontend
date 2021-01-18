@@ -5,13 +5,22 @@ import { NavLink } from "react-router-dom";
 const ItemTile = ({ title, description, url, type }) => {
 	switch (type) {
 		case "lesson":
-			type = "lekcji";
+			type = "Przejdź do lekcji";
 			break;
 		case "module":
-			type = "modułu";
+			type = "Przejdź do modułu";
 			break;
 		case "course":
-			type = "kursów";
+			type = "Przejdź do kursów";
+			break;
+		case "edit":
+			type = "Edytuj";
+			break;
+		case "create":
+			type = "Stwórz";
+			break;
+		default:
+			type = "Przejdź";
 			break;
 	}
 
@@ -20,7 +29,7 @@ const ItemTile = ({ title, description, url, type }) => {
 			<div className={"item-wrapper"}>
 				<p className={"item-description"}>{description}</p>
 				<div className={"link"}>
-					<NavLink to={url}>Przejdź do {type}</NavLink>
+					<NavLink to={url}>{type}</NavLink>
 				</div>
 			</div>
 		</Tile>
