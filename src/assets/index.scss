@@ -44,6 +44,14 @@ a {
   &:hover {
     background-color: seagreen;
   }
+
+  &.middle {
+    margin: 5px auto 0;
+  }
+
+  &.list {
+    margin: 5px;
+  }
 }
 
 .video {
@@ -62,6 +70,7 @@ a {
 }
 
 @import "./form";
+@import "./home";
 @import "./item-tile";
 @import "./loader";
 @import "./layout";

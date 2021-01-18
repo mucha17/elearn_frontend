@@ -9,8 +9,21 @@ import AdminModules from "../pages/AdminModules";
 import AdminCourse from "../pages/AdminCourse";
 import AdminLesson from "../pages/AdminLesson";
 import AdminModule from "../pages/AdminModule";
+import HomePage from "../pages/Home";
 
 export const routes = [
+	{
+		key: -2,
+		exact: true,
+		to: "/",
+		component: <HomePage />,
+	},
+	{
+		key: -1,
+		exact: true,
+		to: "/home",
+		component: <HomePage />,
+	},
 	{
 		key: 0,
 		exact: true,

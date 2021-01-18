@@ -34,33 +34,6 @@ export const AppRouter = () => {
 					component={() => route.component}
 				/>
 			))}
-			<Route exact path={"/home"}>
-				<Layout header={"home"}>
-					<HomePage />
-				</Layout>
-			</Route>
-			<Route exact={true} path={"/cos"}>
-				<HomePage />
-			</Route>
-			<PrivateRoute
-				exact={true}
-				authenticated={keycloak.authenticated}
-				roles={undefined}
-				accessLevel={"none"}
-				path={"/coscos"}
-				component={() => <HomePage />}
-			/>
-			<PrivateRoute
-				exact={true}
-				authenticated={keycloak.authenticated}
-				roles={userRoles}
-				accessLevel={"ROLE_STUDENT"}
-				path={"/coscoscos"}
-				component={HomePage}
-			/>
-			<Route exact={true} path={"/"}>
-				<Redirect to={"/home"} />
-			</Route>
 			<Route>
 				<NotFoundPage />
 			</Route>
