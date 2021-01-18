@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import Mobile from "./Mobile";
-import { top as items, top as items_top } from "../data/menu";
+import { top as items_top } from "../data/menu";
 import MenuLeftItem from "./MenuLeftItem";
 
 const MenuLeft = ({ items, match, hideAll }) => {

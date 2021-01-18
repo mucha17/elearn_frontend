@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import Layout from "../../components/Layout";
-import ItemTile from "../../components/ItemTile";
 import ModuleForm from "../../components/ModuleForm";
 
 class AdminModule extends React.Component {
