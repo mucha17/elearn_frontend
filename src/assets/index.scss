@@ -41,16 +41,20 @@ a {
     color: #fff;
   }
 
-  &:hover {
-    background-color: seagreen;
-  }
-
   &.middle {
     margin: 5px auto 0;
   }
 
   &.list {
     margin: 5px;
+  }
+
+  &.error {
+    background-color: #F00;
+  }
+
+  &:hover {
+    background-color: seagreen;
   }
 }
 

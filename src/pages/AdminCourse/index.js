@@ -4,8 +4,8 @@ import Layout from "../../components/Layout";
 import CourseForm from "../../components/CourseForm";
 
 class AdminCourse extends React.Component {
-    render() {
-        const leftMenu = [
+    state = {
+        leftMenu: [
             {
                 id: 0,
                 name: "Kursy",
@@ -21,22 +21,22 @@ class AdminCourse extends React.Component {
                 name: "Lekcje",
                 to: "/admin/lessons/",
             },
-        ];
-        const {id} = this.props.match.params;
-        const title = "Admin "+(id === "new" ? "nowy kurs" : "edytuj kurs " + id);
+        ]
+    }
 
-        //TODO: fetch course
-        const object = {
-            title: "title",
-            description: "description",
-            id: 1,
-        };
+    render() {
+        const {leftMenu} = this.state;
+        const {id} = this.props.match.params;
+        const is_new = id === "new";
+        const title = "Admin " + (is_new ? "nowy kurs" : "edytuj kurs " + id);
+        let object;
+
         return (
             <Layout header={{
                 title,
                 description: "Strona admina do edycji i tworzenia kursów"
             }} title={title} leftMenu={leftMenu} hideAll>
-                <CourseForm {...object} />
+                {is_new ? <CourseForm/> : <CourseForm {...object} />}
             </Layout>
         );
     }

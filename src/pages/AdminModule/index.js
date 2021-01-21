@@ -4,8 +4,8 @@ import Layout from "../../components/Layout";
 import ModuleForm from "../../components/ModuleForm";
 
 class AdminModule extends React.Component {
-    render() {
-        const leftMenu = [
+    state = {
+        leftMenu: [
             {
                 id: 0,
                 name: "Kursy",
@@ -21,22 +21,21 @@ class AdminModule extends React.Component {
                 name: "Lekcje",
                 to: "/admin/lessons/",
             },
-        ];
-        const {id} = this.props.match.params;
-        const title = "Admin "+(id === "new" ? "nowy moduł" : "edytuj moduł " + id);
+        ]
+    }
 
-        const object = {
-            title: "title",
-            description: "description",
-            id: 1,
-            course_id: 2,
-        };
+    render() {
+        const {leftMenu} = this.state;
+        const {id} = this.props.match.params;
+        const is_new = id === "new";
+        const title = "Admin " + (is_new ? "nowy moduł" : "edytuj moduł " + id);
+        let object;
 
         return (
             <Layout
                 header={{title, description: "Strona admina do edycji i tworzenia modułów"}}
                 title={title} smallTiles leftMenu={leftMenu} hideAll>
-                <ModuleForm {...object} />
+                {is_new ? <ModuleForm/> : <ModuleForm {...object} />}
             </Layout>
         );
     }
