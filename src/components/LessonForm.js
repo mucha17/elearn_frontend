@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {NavLink} from "react-router-dom";
 
-const submitForm = (event) => {
+const submitForm = async (event) => {
     event.preventDefault();
     const object = {
         id: event.target[0].value,
@@ -13,8 +13,24 @@ const submitForm = (event) => {
         content: event.target[6].name === "link" ? event.target[6].value : event.target[6].files[0]
     };
 
-    //TODO: send
     console.log(object);
+    if (object.id === "") {
+        await fetch('http://localhost:8080/api/lessons', {method: 'POST', body: {...object}})
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                window.location("/admin/lessons");
+            })
+            .catch((err) => console.log(err));
+    } else {
+        await fetch('http://localhost:8080/api/lessons/' + object.id, {method: 'PUT', body: {...object}})
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                window.location("/admin/courses");
+            })
+            .catch((err) => console.log(err));
+    }
 };
 
 class LessonForm extends React.Component {

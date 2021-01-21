@@ -22,7 +22,6 @@ class ModuleForm extends React.Component {
         this.setState({courses});
     }
 
-
     submitForm = async (event) => {
         event.preventDefault();
         const object = {
@@ -33,10 +32,23 @@ class ModuleForm extends React.Component {
         };
 
         console.log(object);
-        await fetch('http://localhost:8080/api/modules', {method: 'POST', body: object})
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch((err) => console.log(err));
+        if (object.id === "") {
+            await fetch('http://localhost:8080/api/modules', {method: 'POST', body: {...object}})
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    window.location("/admin/modules");
+                })
+                .catch((err) => console.log(err));
+        } else {
+            await fetch('http://localhost:8080/api/modules/' + object.id, {method: 'PUT', body: {...object}})
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    window.location("/admin/modules");
+                })
+                .catch((err) => console.log(err));
+        }
     };
 
     render() {

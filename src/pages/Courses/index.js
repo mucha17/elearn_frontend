@@ -1,48 +1,53 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import ItemTile from "../../components/ItemTile";
+import Loader from "../../components/Loader";
 
-const Courses = () => {
-    const leftMenu = [
-        {
-            id: 0,
-            name: "Java",
-            to: "/courses/java",
-            description: 'Kursy są przeznaczone dla fanatyków programowania'
-        },
-        {
-            id: 1,
-            name: "PHP",
-            to: "/courses/php",
-            description: 'Kursy są przeznaczone dla fanatyków programowania'
-        },
-        {
-            id: 2,
-            name: "CSS",
-            to: "/courses/css",
-            description: 'Kursy są przeznaczone dla fanatyków programowania'
-        },
-        {
-            id: 3,
-            name: "HTML",
-            to: "/courses/html",
-            description: 'Kursy są przeznaczone dla fanatyków programowania'
-        },
-    ];
-    const items = leftMenu;
+class Courses extends React.Component {
+    state = {
+        courses: []
+    }
 
-    return (
-        <Layout header={{title: 'kursy', description: "Wszystkie kursy koła naukowego IoTes"}} title={"Courses"} smallTiles leftMenu={leftMenu}>
-            {items.map(item => (
-                <ItemTile
-                    title={item.name}
-                    description={item.description}
-                    url={item.to}
-                    type={"course"}
-                />
-            ))}
-        </Layout>
-    );
+    async componentDidMount() {
+        let {courses} = this.state;
+
+        courses = await fetch('http://localhost:8080/api/courses')
+            .then(res => res.json())
+            .then(data => {
+                return data || [];
+            })
+            .catch((err) => {
+                console.log(err);
+                return [];
+            });
+
+        this.setState({courses});
+    }
+
+    render() {
+        const {courses} = this.state;
+
+        if (courses.length === 0) {
+            return <Layout header={{title: 'kursy'}}
+                           title={"Courses"}
+                           smallTiles>
+                <Loader/>
+            </Layout>
+        }
+        return (
+            <Layout header={{title: 'kursy', description: "Wszystkie kursy koła naukowego IoTes"}} title={"Courses"}
+                    smallTiles leftMenu={courses}>
+                {courses.map(course => (
+                    <ItemTile
+                        title={course.name}
+                        description={course.description}
+                        url={course.to}
+                        type={"course"}
+                    />
+                ))}
+            </Layout>
+        );
+    }
 };
 
 export default Courses;

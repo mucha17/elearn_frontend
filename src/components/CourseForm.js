@@ -18,9 +18,12 @@ const submitForm = async (event) => {
             })
             .catch((err) => console.log(err));
     } else {
-        await fetch('http://localhost:8080/api/courses', {method: 'PUT', body: {...object}})
+        await fetch('http://localhost:8080/api/courses/' + object.id, {method: 'PUT', body: {...object}})
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                console.log(data);
+                window.location("/admin/courses");
+            })
             .catch((err) => console.log(err));
     }
 };
