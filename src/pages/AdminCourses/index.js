@@ -27,7 +27,7 @@ class AdminCourses extends React.Component {
 			id: 0,
 			title: "Nowy",
 			description: "Przejdź tutaj aby utworzyć nowy kurs.",
-			url: "/admin/courses/0",
+			url: "/admin/courses/new",
 		};
 		const courses = [
 			{

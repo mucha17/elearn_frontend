@@ -23,7 +23,7 @@ class AdminCourse extends React.Component {
             },
         ];
         const {id} = this.props.match.params;
-        const title = "Admin "+(id === "0" ? "nowy kurs" : "edytuj kurs " + id);
+        const title = "Admin "+(id === "new" ? "nowy kurs" : "edytuj kurs " + id);
 
         //TODO: fetch course
         const object = {

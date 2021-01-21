@@ -27,7 +27,7 @@ class AdminModules extends React.Component {
 			id: 0,
 			title: "Nowy",
 			description: "Przejdź tutaj aby utworzyć nowy moduł dla kursu.",
-			url: "/admin/modules/0",
+			url: "/admin/modules/new",
 		};
 		const modules = [
 			{

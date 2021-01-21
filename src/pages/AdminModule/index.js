@@ -23,7 +23,7 @@ class AdminModule extends React.Component {
             },
         ];
         const {id} = this.props.match.params;
-        const title = "Admin "+(id === "0" ? "nowy moduł" : "edytuj moduł " + id);
+        const title = "Admin "+(id === "new" ? "nowy moduł" : "edytuj moduł " + id);
 
         const object = {
             title: "title",

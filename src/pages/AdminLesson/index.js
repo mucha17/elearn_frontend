@@ -23,7 +23,7 @@ class AdminLesson extends React.Component {
             },
         ];
         const {id} = this.props.match.params;
-        const title = "Admin " + (id === "0" ? "nowa lekcja" : "edytuj lekcję " + id);
+        const title = "Admin " + (id === "new" ? "nowa lekcja" : "edytuj lekcję " + id);
 
         const object = {
             id: 0,

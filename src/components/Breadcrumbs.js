@@ -9,18 +9,21 @@ const Breadcrumbs = () => {
     if (crumbs[crumbs.length - 1] === "") {
         crumbs.pop();
     }
+    crumbs.unshift('');
 
     let realLink = "";
 
     return (
         <div className={'breadcrumbs-wrapper'}>
             {crumbs.map((crumb, id) => {
-                realLink = realLink + "/" + crumb;
+                if (crumb.length !== 0) {
+                    realLink = realLink + "/" + crumb;
+                }
 
                 return (
                     <div className={'breadcrumb'}>
                         <NavLink to={realLink} key={'breadcrumb-' + id}>
-                            /{crumb}
+                            /{crumb.length === 0 ? "home" : crumb}
                         </NavLink>
                     </div>
                 )
