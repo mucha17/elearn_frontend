@@ -83,7 +83,6 @@ class LessonForm extends React.Component {
         } = this.props;
         const {types, selectedType, readUrl, modules} = this.state;
 
-
         if (modules.length === 0) {
             return <div className={'link middle error'}>
                 <NavLink to={'/admin/modules/new'}>

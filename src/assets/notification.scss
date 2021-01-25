@@ -1,0 +1,66 @@
+.notification-wrapper {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  left: 50%;
+  z-index: 10;
+  transform: translateX(-50%);
+}
+
+.notification-inner-wrapper {
+  position: relative;
+  margin: 0 auto;
+}
+
+.notification {
+  box-shadow: 0 0 3px 1px rgba(#000, 0.5);
+  background-color: #fff;
+  position: relative;
+  margin: 10px 0;
+  min-width: 250px;
+  max-width: 300px;
+  padding: 5px;
+  border-radius: 5px;
+
+  &.success {
+    background-color: #0f0;
+  }
+
+  &.failure {
+    background-color: #f00;
+  }
+
+  &.processing {
+    background-color: orange;
+  }
+
+  &.closing {
+    transition: all 0.25s ease-in-out;
+    padding: 0;
+    height: 0;
+    transform-origin: top center;
+    transform: scale(0);
+    overflow: hidden;
+  }
+}
+
+.notification-title {
+  width: calc(100% - 19px);
+  margin: 0;
+  text-align: left;
+  text-indent: 3px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.notification-message {
+  margin-top: 4px;
+  text-align: justify;
+  padding: 3px;
+  text-indent: 3px;
+  background-color: rgba(#fff, 0.5);
+  border-radius: 5px;
+}
