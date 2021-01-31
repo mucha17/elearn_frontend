@@ -2,6 +2,7 @@ import React from "react";
 import {withRouter} from "react-router-dom";
 import Layout from "../../components/Layout";
 import CourseForm from "../../components/CourseForm";
+import database from "../../database"
 
 class AdminCourse extends React.Component {
     state = {
@@ -21,15 +22,27 @@ class AdminCourse extends React.Component {
                 name: "Lekcje",
                 to: "/admin/lessons/",
             },
-        ]
+        ],
+        object: {}
+    }
+
+    async componentDidMount() {
+        const {id} = this.props.match.params;
+        let {object} = this.state;
+        const is_new = id === "new";
+
+        if (!is_new) {
+            object = await database.get('courses/get/' + id);
+        }
+
+        this.setState({object})
     }
 
     render() {
-        const {leftMenu} = this.state;
+        const {leftMenu, object} = this.state;
         const {id} = this.props.match.params;
         const is_new = id === "new";
         const title = "Admin " + (is_new ? "nowy kurs" : "edytuj kurs " + id);
-        let object;
 
         return (
             <Layout header={{

@@ -9,18 +9,17 @@ const submitForm = async (event) => {
     const {object, form} = functions.createForm(event, {description: textArea});
 
     let returnData = false;
+
     if (object.course_id) {
-        returnData = await database.update(`courses/${object.course_id}`, () => {
+        returnData = await database.update(`courses/update/${object.course_id}`, () => {
         }, form)
     } else {
-        returnData = await database.post('courses/', () => {
+        returnData = await database.post('courses/create/', () => {
         }, form)
     }
 
     if (returnData) {
-        console.log("Success")
-    } else {
-        console.log("Failure")
+        window.location.replace("/admin/courses");
     }
 }
 
@@ -39,11 +38,12 @@ const CourseForm = ({id, name, description}) => {
                     id={"description"}
                     name={"description"}
                     onChange={(event) => autoResize(event)}
+                    defaultValue={description}
                 >
 				{description}
 			    </textarea>
             </div>
-            <SubmitInput text={'Dodaj'}/>
+            <SubmitInput text={name ? 'Aktualizuj' : 'Dodaj'}/>
         </form>
     );
 };

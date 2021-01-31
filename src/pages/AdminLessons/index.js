@@ -1,14 +1,15 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
 import Layout from "../../components/Layout";
-import ItemTile from "../../components/ItemTile";
+import {NavLink} from "react-router-dom";
 import Loader from "../../components/Loader";
-import database from "../../database";
-import Tile from "../../components/Tile";
 import Lister from "../../components/lister";
+import Tile from "../../components/Tile";
+import database from "../../database"
 
-class AdminLessons extends React.Component {
+class AdminCourses extends React.Component {
     state = {
+        lessons: [],
         leftMenu: [
             {
                 id: 0,
@@ -25,64 +26,65 @@ class AdminLessons extends React.Component {
                 name: "Lekcje",
                 to: "/admin/lessons/",
             },
-        ],
-        lessons: []
+        ]
     }
-
-    getCreatingItem = () => {
-        return {
-            id: 0,
-            title: "Nowy",
-            description: "Przejdź tutaj aby utworzyć nową lekcję.",
-            url: "/admin/lessons/new",
-        };
-    }
-
 
     async componentDidMount() {
-        let {lessons, leftMenu} = this.state;
+        let {lessons} = this.state;
 
-        lessons = await database.get("lessons");
-        leftMenu = lessons;
+        lessons = await database.get("lessons/get");
 
-        for (let menuItem in leftMenu) {
-            leftMenu[menuItem].url = "/admin/lessons/" + leftMenu[menuItem].id;
-        }
-
-        this.setState({lessons, leftMenu});
+        this.setState({lessons});
     }
-
 
     render() {
         const {leftMenu, lessons} = this.state;
 
         if (lessons.length === 0) {
-            return <Layout
-                header={{title: "Admin - lekcje", description: "Strona admina ze wszystkimi lekcjami"}}
-                title="Admin - lekcje"
-                smallTiles
-                leftMenu={leftMenu}
-                hideAll
-            >
-                <Loader/>
-            </Layout>
+            return (
+                <Layout
+                    header={{title: "Admin - lekcje", description: "Strona admina ze wszystkimi lekcjami"}}
+                    title="Admin - lekcje"
+                    smallTiles
+                    leftMenu={leftMenu}
+                    hideAll
+                >
+                    <Tile title={"Akcje"}>
+                        <NavLink to={'/admin/lessons/new'}>
+                            <input type={'button'} value={'Stwórz nową'}/>
+                        </NavLink>
+                    </Tile>
+                    <Loader/>
+                </Layout>
+            )
         }
         return (
             <Layout
-                header={{title: "Admin - lekcje", description: "Strona admina ze wszystkimi lekcjami"}}
+                header={{title: "Admin - lekcje", description: "Strona admina ze wszystkimi lekcje"}}
                 title="Admin - lekcje"
                 smallTiles
                 leftMenu={leftMenu}
                 hideAll
             >
+                <Tile title={"Akcje"}>
+                    <NavLink to={'/admin/lessons/new'}>
+                        <input type={'button'} value={'Stwórz nową'}/>
+                    </NavLink>
+                </Tile>
                 <Lister
                     name={'Lekcje'}
                     items={lessons}
-                    Component={({name}) => <div className="error">{name}</div>}
-                    actionDelete={(id) => console.log(id)}
+                    Component={({name}) => <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            alignItems: "center",
+                            height: "100%"
+                        }}>{name}</div>}
+                    actionDelete={async (id) => database.remove('lessons/delete/' + id)}
                     linkSingle={`admin/lessons`}
                     filterKeys={{
-                        skip: ["id"],
+                        skip: ["id", "url", "content_type", "content_url", "module_id", "created_at", "updated_at"],
                         only: [],
                     }}
                 />
@@ -91,4 +93,4 @@ class AdminLessons extends React.Component {
     }
 }
 
-export default withRouter(AdminLessons);
+export default withRouter(AdminCourses);

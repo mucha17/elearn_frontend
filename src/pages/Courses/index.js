@@ -16,7 +16,7 @@ class Courses extends React.Component {
     async componentDidMount() {
         let {courses, leftMenu} = this.state;
 
-        courses = await database.get("courses");
+        courses = await database.get("courses/get");
         leftMenu = courses;
 
         for (let menuItem in leftMenu) {

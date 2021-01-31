@@ -10,20 +10,31 @@ import database from "../../database";
 class AdminModules extends React.Component {
     state = {
         modules: [],
-        leftMenu: [],
+        leftMenu: [
+            {
+                id: 0,
+                name: "Kursy",
+                to: "/admin/courses/",
+            },
+            {
+                id: 1,
+                name: "Moduły",
+                to: "/admin/modules/",
+            },
+            {
+                id: 2,
+                name: "Lekcje",
+                to: "/admin/lessons/",
+            },
+        ]
     }
 
     async componentDidMount() {
-        let {modules, leftMenu} = this.state;
+        let {modules} = this.state;
 
-        modules = await database.get("modules");
-        leftMenu = modules;
+        modules = await database.get("modules/get");
 
-        for (let menuItem in leftMenu) {
-            leftMenu[menuItem].url = "/admin/modules/" + leftMenu[menuItem].id;
-        }
-
-        this.setState({modules, leftMenu});
+        this.setState({modules});
     }
 
     render() {
@@ -56,11 +67,16 @@ class AdminModules extends React.Component {
                 <Lister
                     name={'Moduły'}
                     items={modules}
-                    Component={({name}) => <div className="error">{name}</div>}
-                    actionDelete={(id) => console.log(id)}
+                    Component={({name}) => <div style={{
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        alignItems: "center",
+                        height: "100%"
+                    }}>{name}</div>}
+                    actionDelete={async (id) => database.remove('modules/delete/' + id)}
                     linkSingle={`admin/modules`}
                     filterKeys={{
-                        skip: ["id"],
+                        skip: ["id", "to", "created_at", "updated_at", "url","course_id"],
                         only: [],
                     }}
                 />

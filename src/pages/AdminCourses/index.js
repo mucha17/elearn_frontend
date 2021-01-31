@@ -10,20 +10,31 @@ import database from "../../database"
 class AdminCourses extends React.Component {
     state = {
         courses: [],
-        leftMenu: []
+        leftMenu: [
+            {
+                id: 0,
+                name: "Kursy",
+                to: "/admin/courses/",
+            },
+            {
+                id: 1,
+                name: "Moduły",
+                to: "/admin/modules/",
+            },
+            {
+                id: 2,
+                name: "Lekcje",
+                to: "/admin/lessons/",
+            },
+        ]
     }
 
     async componentDidMount() {
-        let {courses, leftMenu} = this.state;
+        let {courses} = this.state;
 
-        courses = await database.get("courses");
-        leftMenu = courses;
+        courses = await database.get("courses/get");
 
-        for (let menuItem in leftMenu) {
-            leftMenu[menuItem].url = "/admin/courses/" + leftMenu[menuItem].id;
-        }
-
-        this.setState({courses, leftMenu});
+        this.setState({courses});
     }
 
     render() {
@@ -63,11 +74,17 @@ class AdminCourses extends React.Component {
                 <Lister
                     name={'Kursy'}
                     items={courses}
-                    Component={({title}) => <div className="error">{title}</div>}
-                    actionDelete={(id) => console.log(id)}
-                    linkSingle={`admin/courses`}
+                    Component={({name}) => <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            alignItems: "center",
+                            height: "100%"
+                        }}>{name}</div>}
+                    actionDelete={async (id) => database.remove('courses/delete/' + id)}
+                    linkSingle={`admin/courses/`}
                     filterKeys={{
-                        skip: ["id"],
+                        skip: ["id", "to", "created_at", "updated_at", "url"],
                         only: [],
                     }}
                 />

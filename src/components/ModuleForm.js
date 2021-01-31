@@ -1,59 +1,51 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
+import database from "../database"
+import functions from "../functions"
+import SubmitInput from "./inputs/SubmitInput";
 
 class ModuleForm extends React.Component {
     state = {
-        courses: []
+        courses: [],
+        object: {}
     }
 
     async componentDidMount() {
-        let {courses} = this.state;
+        let {courses, object} = this.state;
+        const {id} = this.props.match.params;
 
-        courses = await fetch('http://localhost:8080/api/courses')
-            .then(res => res.json())
-            .then(data => {
-                return data || [];
-            })
-            .catch((err) => {
-                console.log(err);
-                return [];
-            });
+        courses = await database.get('courses/get');
+        if (id !== "new") {
+            object = await database.get('modules/get/' + id);
+        }
 
-        this.setState({courses});
+        this.setState({courses, object});
     }
 
     submitForm = async (event) => {
         event.preventDefault();
-        const object = {
-            id: event.target[0].value,
-            name: event.target[1].value,
+        const {object, form} = functions.createForm(event, {
             description: event.target[2].value,
             course_id: event.target[3].value,
-        };
+        });
 
-        console.log(object);
-        if (object.id === "") {
-            await fetch('http://localhost:8080/api/modules', {method: 'POST', body: {...object}})
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    window.location("/admin/modules");
-                })
-                .catch((err) => console.log(err));
+        let returne = false
+        if (object.module_id) {
+            returne = await database.post('modules/update/' + object.module_id, () => {
+            }, form)
         } else {
-            await fetch('http://localhost:8080/api/modules/' + object.id, {method: 'PUT', body: {...object}})
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    window.location("/admin/modules");
-                })
-                .catch((err) => console.log(err));
+            returne = await database.post('modules/create/', () => {
+            }, form)
+        }
+
+        if (returne) {
+            window.location.replace('/admin/modules')
         }
     };
 
     render() {
-        const {id, title, description, course_id} = this.props;
-        const {courses} = this.state;
+        const {courses, object} = this.state;
+        const {id, name, description, course_id} = object;
 
         if (courses.length === 0) {
             return <div className={'link middle error'}>
@@ -66,29 +58,35 @@ class ModuleForm extends React.Component {
         return (
             <form onSubmit={(event) => this.submitForm(event)}>
                 <input type="hidden" name={"module_id"} value={id}/>
-                <label for={"name"}>Tytuł</label>
-                <input id={"title"} type="text" name="title" value={title}/>
-                <label htmlFor={"description"}>Opis</label>
-                <textarea
-                    id={"description"}
-                    name={"description"}
-                    onChange={(event) => autoResize(event)}
-                >
-				{description}
-			</textarea>
-                <label htmlFor={"course_id"}>Kurs</label>
-                <select id={"course_id"}>
-                    {courses.map((course) => (
-                        <option
-                            key={course.id}
-                            value={course.id}
-                            selected={course_id === course.id}
-                        >
-                            {course.name}
-                        </option>
-                    ))}
-                </select>
-                <input type={"submit"} value={"Dodaj"}/>
+                <div className={'input-wrapper'}>
+                    <label for={"name"}>Tytuł</label>
+                    <input id={"title"} type="text" name="name" defaultValue={name}/>
+                </div>
+                <div className={'input-wrapper'}>
+                    <label htmlFor={"description"}>Opis</label>
+                    <textarea
+                        id={"description"}
+                        name={"description"}
+                        onChange={(event) => autoResize(event)}
+                        defaultValue={description}
+                    >
+			            </textarea>
+                </div>
+                <div className={'input-wrapper'}>
+                    <label htmlFor={"course_id"}>Kurs</label>
+                    <select id={"course_id"}>
+                        {courses.map((course) => (
+                            <option
+                                key={course.id}
+                                value={course.id}
+                                selected={course_id === course.id}
+                            >
+                                {course.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <SubmitInput text={name ? 'Aktualizuj' : 'Dodaj'}/>
             </form>
         );
     }
@@ -101,4 +99,4 @@ const autoResize = (event) => {
     target.style.height = height + "px";
 };
 
-export default ModuleForm;
+export default withRouter(ModuleForm);

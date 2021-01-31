@@ -1,7 +1,7 @@
 import store from "../redux/store"
 import {addNotification} from "../redux/actions/notification"
 
-export const BACKEND_URL = "http://localhost:8080/api/"
+export const BACKEND_URL = "http://localhost:8000/api/admin/"
 
 /**
  * Response status handler

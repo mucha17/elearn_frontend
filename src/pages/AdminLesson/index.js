@@ -1,11 +1,12 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
 import Layout from "../../components/Layout";
+import database from "../../database";
 import LessonForm from "../../components/LessonForm";
 
-class AdminLesson extends React.Component {
-    render() {
-        const leftMenu = [
+class AdminModule extends React.Component {
+    state = {
+        leftMenu: [
             {
                 id: 0,
                 name: "Kursy",
@@ -21,32 +22,37 @@ class AdminLesson extends React.Component {
                 name: "Lekcje",
                 to: "/admin/lessons/",
             },
-        ];
-        const {id} = this.props.match.params;
-        const title = "Admin " + (id === "new" ? "nowa lekcja" : "edytuj lekcję " + id);
+        ],
+        object: {}
+    }
 
-        const object = {
-            id: 0,
-            title: "Titel",
-            description: "opis",
-            type: "document",
-            is_url: true,
-            content: "url",
-            course_id: 2,
-            module_id: 2,
-        };
+    async componentDidMount() {
+        const {id} = this.props.match.params;
+        let {object} = this.state;
+        const is_new = id === "new";
+
+        if (!is_new) {
+            object = await database.get('lessons/get/' + id);
+        }
+
+        this.setState({object})
+    }
+
+    render() {
+        const {leftMenu} = this.state;
+        const {id} = this.props.match.params;
+        const is_new = id === "new";
+        const title = "Admin " + (is_new ? "nowa lekcja" : "edytuj lekcję " + id);
+        let object;
 
         return (
             <Layout
-                header={{
-                    title,
-                    description: "Strona admina do edycji i tworzenia lekcji"
-                }}
+                header={{title, description: "Strona admina do edycji i tworzenia lekcji"}}
                 title={title} smallTiles leftMenu={leftMenu} hideAll>
-                <LessonForm {...object} />
+                {is_new ? <LessonForm/> : <LessonForm {...object} />}
             </Layout>
         );
     }
 }
 
-export default withRouter(AdminLesson);
+export default withRouter(AdminModule);
