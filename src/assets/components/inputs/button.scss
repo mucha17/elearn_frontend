@@ -1,0 +1,99 @@
+button {
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+  transition: filter 0.1s ease-in-out, background-color 0.25s;
+  font-size: 18px;
+  margin: 5px;
+
+  @include themify {
+    color: $colorWhite;
+
+    svg {
+      color: themed($colorMainContrast);
+    }
+  }
+
+  & .round {
+    border-radius: 50%;
+  }
+
+  &.absolute {
+    position: absolute;
+  }
+
+  &.top {
+    top: 0;
+  }
+
+  &.right {
+    right: 0;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  &.center {
+    margin: auto;
+  }
+
+  &.small {
+    font-size: 16px;
+    padding: 0 8px;
+  }
+
+  &:hover {
+    color: $colorWhite;
+
+    @include themify {
+      filter: drop-shadow(0 0 1px themed($colorMainContrast));
+    }
+  }
+
+  &.notification-button svg {
+    @include themify {
+      color: $colorWhite;
+    }
+  }
+}
+
+input[type="button"],
+input[type="submit"] {
+  @extend button;
+  background-color: $colorButton;
+  border-radius: 3px;
+  margin: 5px;
+  min-height: 30px;
+  min-width: 70px;
+
+  @include themify {
+    box-shadow: 0 0 3px 1px rgba(themed($colorMainContrast), $fullOpacity);
+  }
+
+  &:hover {
+    background-color: $colorSuccess;
+  }
+
+  &.small {
+    min-height: 28px;
+    min-width: 66px;
+  }
+
+  &.warn {
+    background-color: $colorFailure;
+
+    &:hover {
+      background-color: $colorDarkBlue;
+      color: $colorFailure;
+    }
+  }
+
+  svg {
+    color: $colorBlack;
+  }
+}
+
+.submit-wrapper {
+  margin-top: 5px;
+  width: calc(100% - 5px);
+  display: flex;
+}

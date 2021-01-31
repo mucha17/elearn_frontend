@@ -1,0 +1,20 @@
+input[type=file] {
+  display: none;
+}
+
+.input-image-wrapper {
+  padding: 10px;
+  margin: auto;
+}
+
+.input-image {
+  max-height: 300px;
+  max-width: 300px;
+  width: auto;
+  height: auto;
+  margin: auto;
+
+  @include themify {
+    box-shadow: 0 0 3px 1px rgba(themed($colorMainContrast), $lightOpacity);
+  }
+}

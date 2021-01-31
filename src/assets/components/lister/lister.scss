@@ -1,0 +1,48 @@
+.lister-items {
+  width: 100%;
+  padding: 10px 5px 1px;
+}
+
+.lister-outer-item-wrapper {
+  display: flex;
+  align-items: stretch;
+  margin: 5px 0;
+  border-radius: 5px;
+  overflow: hidden;
+
+  @include themify {
+    box-shadow: inset 0 -2px 3px 1px rgba(themed($colorMainContrast), $fullOpacity);
+  }
+
+  &:hover {
+    @include themify {
+      background-color: rgba(themed($colorMainContrast), $fullOpacity);
+    }
+  }
+}
+
+.lister-item {
+  width: 100%;
+  display: flex;
+  padding-right: 5px;
+  cursor: pointer;
+  box-sizing: border-box;
+  align-items: center;
+
+  .lister-outer-item-wrapper:hover > &,
+  &:hover {
+    @include themify {
+      background-color: rgba(themed($colorMainContrast), $fullOpacity);
+    }
+  }
+
+  input[type="checkbox"]:checked ~ & {
+    background-color: rgba($colorSuccess, $fullOpacity);
+  }
+}
+
+.lister-link-wrapper,
+.lister-item-wrapper {
+  width: 100%;
+  height: 100%;
+}

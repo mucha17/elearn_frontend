@@ -1,0 +1,63 @@
+label {
+  text-indent: 3px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+
+  @include themify {
+    border-bottom: 1px solid themed($colorMainContrast);
+  }
+
+  &.button {
+    border: 0;
+    background-color: $colorButton;
+    text-align: center;
+    border-radius: 5px;
+    padding: 3px 5px;
+    color: $colorWhite;
+    margin: 5px;
+
+    &:hover {
+      background-color: $colorButtonHover;
+    }
+
+    @include themify {
+      box-shadow: 0 0 3px 1px rgba(themed($colorMainContrast), $fullOpacity);
+    }
+  }
+
+  &.checkbox {
+    border: 0;
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &.lister-checkbox {
+    display: flex;
+    align-items: center;
+    border-radius: 0;
+    border: 0;
+    margin: 0 0 0 -7px;
+    width: 40px;
+
+    @include themify {
+      background-color: themed($colorMainContrast);
+      box-shadow: inset 0 -1px 5px 1px rgba(themed($colorMain), $lightOpacity);
+    }
+
+    input[type=checkbox]:checked + & {
+      background-color: rgba($colorSuccess, $halfOpacity);
+
+      svg {
+        opacity: 1;
+      }
+    }
+
+    svg {
+      padding-left: 2px;
+      margin: auto;
+      opacity: 0;
+    }
+  }
+}

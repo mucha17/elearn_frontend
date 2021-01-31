@@ -1,0 +1,11 @@
+.login-form {
+  width: 300px;
+  margin: 50px auto;
+  padding: 8px 8px 5px;
+  border-radius: 5px;
+
+  @include themify {
+    background-color: themed($colorMain);
+    box-shadow: 0 0 3px 1px rgba(themed($colorMainContrast), $fullOpacity);
+  }
+}

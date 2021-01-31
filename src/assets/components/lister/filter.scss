@@ -1,0 +1,26 @@
+.lister-filters-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  padding: 5px;
+
+  @include themify {
+    box-shadow: inset 0 0 5px 1px rgba(themed($colorMainBlue), $fullOpacity);
+  }
+}
+
+.lister-filter-item-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 0 5px;
+}
+
+.lister-filter-item {
+  width: 100%;
+
+  &.key {
+    width: 150px;
+  }
+}

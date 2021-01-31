@@ -1,0 +1,82 @@
+.poster-wrapper {
+}
+
+.poster-inner-wrapper {
+  width: 178px;
+  height: 254px;
+  background-size: 100%;
+  background-position: center;
+  cursor: pointer;
+  transition: background-size 0.25s ease-in-out;
+  position: relative;
+
+  .tv & {
+    width: 254px;
+    height: 178px;
+  }
+
+  .hover &,
+  &:hover {
+    background-size: 130%;
+  }
+}
+
+.poster-pin {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 3px 8px;
+  border-radius: 5px;
+  box-shadow: 0 0 3px 1px rgba($colorBlack, $halfOpacity);
+  transform: translateX(7px) rotate(10deg);
+  z-index: 5;
+}
+
+.poster-text {
+  color: $colorWhite;
+  text-shadow: 1px 1px 1px $colorBlack,
+  -1px 1px 1px $colorBlack,
+  1px -1px 1px $colorBlack,
+  -1px -1px 1px $colorBlack,
+  1px 1px 1px $colorBlack,
+  -1px 1px 1px $colorBlack,
+  1px -1px 1px $colorBlack,
+  -1px -1px 1px $colorBlack,
+  1px 1px 1px $colorBlack,
+  -1px 1px 1px $colorBlack,
+  1px -1px 1px $colorBlack,
+  -1px -1px 1px $colorBlack,
+  1px 1px 1px $colorBlack,
+  -1px 1px 1px $colorBlack,
+  1px -1px 1px $colorBlack,
+  -1px -1px 1px $colorBlack;
+  letter-spacing: 0.75px;
+}
+
+.poster-hidden {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .poster-text {
+    font-size: 20px;
+    opacity: 0;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background-color: rgba($colorWhite, $halfOpacity);
+  }
+
+  .hover &,
+  &:hover {
+    box-shadow: inset 0 0 25px 25px rgba($colorBlack, $lightOpacity);
+
+    .poster-text {
+      opacity: 1;
+    }
+  }
+}

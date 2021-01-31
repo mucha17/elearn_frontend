@@ -1,0 +1,20 @@
+.content-form {
+  width: 100%;
+}
+
+textarea {
+  width: 98%;
+  margin: 0 1%;
+  box-sizing: border-box;
+  border: 1px solid rgba(silver, 0.6);
+  border-radius: 3px;
+  font-size: 16px;
+  resize: vertical;
+  min-height: 100px;
+  overflow: hidden;
+  transition: height 0.25s ease-in-out;
+
+  &:focus {
+    border: 1px solid silver;
+  }
+}

@@ -1,0 +1,44 @@
+.status-wrapper {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+
+  &.unknown {
+    background-color: rgba($colorUnknown, $fullOpacity);
+  }
+
+  &.failure {
+    background-color: rgba($colorFailure, $fullOpacity);
+  }
+
+  &.success {
+    background-color: rgba($colorSuccess, $fullOpacity);
+  }
+}
+
+.status-icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+  margin-right: 10px;
+
+  @include themify {
+    box-shadow: inset 0 0 3px 1px rgba(themed($colorMainContrast), $halfOpacity);
+  }
+
+  &.unknown {
+    @include themify {
+      background-color: themed($colorMain);
+    }
+  }
+
+  &.failure {
+    background-color: $colorFailure;
+  }
+
+  &.success {
+    background-color: $colorSuccess;
+  }
+}
