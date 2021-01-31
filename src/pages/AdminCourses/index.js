@@ -1,8 +1,10 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
 import Layout from "../../components/Layout";
-import ItemTile from "../../components/ItemTile";
+import {NavLink} from "react-router-dom";
 import Loader from "../../components/Loader";
+import Lister from "../../components/lister";
+import Tile from "../../components/Tile";
 
 class AdminCourses extends React.Component {
     state = {
@@ -47,7 +49,6 @@ class AdminCourses extends React.Component {
                 console.log(err);
                 return [];
             });
-        courses.unshift(this.getCreatingItem());
 
         this.setState({courses});
     }
@@ -56,15 +57,22 @@ class AdminCourses extends React.Component {
         const {leftMenu, courses} = this.state;
 
         if (courses.length === 0) {
-            return <Layout
-                header={{title: "Admin - kursy", description: "Strona admina ze wszystkimi kursami"}}
-                title="Admin - kursy"
-                smallTiles
-                leftMenu={leftMenu}
-                hideAll
-            >
-                <Loader />
-            </Layout>
+            return (
+                <Layout
+                    header={{title: "Admin - kursy", description: "Strona admina ze wszystkimi kursami"}}
+                    title="Admin - kursy"
+                    smallTiles
+                    leftMenu={leftMenu}
+                    hideAll
+                >
+                    <Tile title={"Akcje"}>
+                        <NavLink to={'/admin/courses/new'}>
+                            <input type={'button'} value={'Stwórz nowy'}/>
+                        </NavLink>
+                    </Tile>
+                    <Loader/>
+                </Layout>
+            )
         }
         return (
             <Layout
@@ -74,15 +82,22 @@ class AdminCourses extends React.Component {
                 leftMenu={leftMenu}
                 hideAll
             >
-                {courses.map((course) => (
-                    <ItemTile
-                        key={course.id}
-                        title={course.title}
-                        description={course.description}
-                        url={course.url}
-                        type={course.id === 0 ? "default" : "edit"}
-                    />
-                ))}
+                <Tile title={"Akcje"}>
+                    <NavLink to={'/admin/courses/new'}>
+                        <input type={'button'} value={'Stwórz nowy'}/>
+                    </NavLink>
+                </Tile>
+                <Lister
+                    items={courses}
+                    Component={({title}) => <div className="error">{title}</div>}
+                    actionDelete={(id) => console.log(id)}
+                    linkSingle={`admin/courses`}
+                    name={"No title given"}
+                    filterKeys={{
+                        skip: ["id"],
+                        only: [],
+                    }}
+                />
             </Layout>
         );
     }

@@ -9,7 +9,7 @@ const Layout = ({children, header, title, smallTiles, leftMenu, hideAll}) => (
     <div className={"layout"}>
         <Header {...header} />
         <MenuTop/>
-        <div className={"content"}>
+        <div className={"site-wrapper"}>
             <MenuLeft items={leftMenu} hideAll={hideAll}/>
             <Notifications/>
             <div className={"content-wrapper"}>

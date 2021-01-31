@@ -30,21 +30,21 @@ class Admin extends React.Component {
 					description={
 						"Przejdź tutaj aby utworzyć lub edytować kursy."
 					}
-					url={"/admin/courses"}
+					url={"admin/courses"}
 				/>
 				<ItemTile
 					title={"Moduły"}
 					description={
 						"Przejdź tutaj aby utworzyć lub edytować moduły."
 					}
-					url={"/admin/modules"}
+					url={"admin/modules"}
 				/>
 				<ItemTile
 					title={"Lekcje"}
 					description={
 						"Przejdź tutaj aby utworzyć lub edytować lekcje."
 					}
-					url={"/admin/lessons"}
+					url={"admin/lessons"}
 				/>
 			</Layout>
 		);

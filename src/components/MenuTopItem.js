@@ -1,27 +1,27 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
-const MenuTopItem = ({ name, to, action, condition }) => {
-	condition = condition ?? true;
-	action = action ?? false;
+const MenuTopItem = ({name, to, action, condition}) => {
+    condition = condition ?? true;
+    action = action ?? false;
 
-	if (condition) {
-		if (action) {
-			return (
-				<div onClick={() => action()}>
-					<div className={"menu-top-item"}>{name}</div>
-				</div>
-			);
-		} else {
-			return (
-				<NavLink to={to}>
-					<div className={"menu-top-item"}>{name}</div>
-				</NavLink>
-			);
-		}
-	} else {
-		return <></>;
-	}
+    if (condition) {
+        if (action) {
+            return (
+                <div onClick={() => action()}>
+                    <div className={"menu-item top"}>{name}</div>
+                </div>
+            );
+        } else {
+            return (
+                <NavLink to={to}>
+                    <div className={"menu-item top"}>{name}</div>
+                </NavLink>
+            );
+        }
+    } else {
+        return <></>;
+    }
 };
 
 export default MenuTopItem;

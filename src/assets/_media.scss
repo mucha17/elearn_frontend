@@ -73,8 +73,26 @@ $largeDesktopMin: 1200px;
   }
 }
 
-.mobile-only {
+.max-mobile {
   @include tabletMin {
+    display: none;
+  }
+}
+
+.max-tablet {
+  @include desktopMin {
+    display: none;
+  }
+}
+
+.min-tablet {
+  @include mobileMax {
+    display: none;
+  }
+}
+
+.min-desktop {
+  @include tabletMax {
     display: none;
   }
 }
