@@ -69,7 +69,7 @@ class Notification extends React.Component {
                     X
                 </button>
                 <h3 className="notification-title no-border">
-                    {title}
+                    {title || status.name}
                 </h3>
                 {message?.length > 0 && (
                     <div className="notification-message">{message}</div>
@@ -113,7 +113,6 @@ const getNotificationStatus = (status) => {
 
 Notification.defaultProps = {
     status: "unknown",
-    title: "No title given",
     message: "",
     id: -1,
     autoClose: false,

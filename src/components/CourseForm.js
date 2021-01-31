@@ -1,10 +1,32 @@
 import React from "react";
 import TextInput from "./inputs/TextInput";
 import SubmitInput from "./inputs/SubmitInput";
+import functions from "../functions"
+import database from "../database"
+
+const submitForm = async (event) => {
+    const textArea = document.getElementsByTagName('textarea')[0].value;
+    const {object, form} = functions.createForm(event, {description: textArea});
+
+    let returnData = false;
+    if (object.course_id) {
+        returnData = await database.update(`courses/${object.course_id}`, () => {
+        }, form)
+    } else {
+        returnData = await database.post('courses/', () => {
+        }, form)
+    }
+
+    if (returnData) {
+        console.log("Success")
+    } else {
+        console.log("Failure")
+    }
+}
 
 const CourseForm = ({id, name, description}) => {
     return (
-        <form onSubmit={(event) => (event)}>
+        <form onSubmit={(event) => submitForm(event)}>
             <input type="hidden" name={"course_id"} value={id}/>
             <TextInput
                 title={'Tytuł'}

@@ -33,14 +33,19 @@ class Lister extends React.Component {
 
         let {filteredItems} = this.state
 
-        const items = filteredItems.slice(page * itemsPerPage, (page + 1) * itemsPerPage)
+        let items = []
+        try {
+            items = filteredItems.slice(page * itemsPerPage, (page + 1) * itemsPerPage)
+        } catch {
+            items = []
+        }
 
         this.setState({items}, () => this.forceUpdate())
     }
 
     render() {
         const {items, allItems, filteredItems} = this.state
-        const {Component, linkSingle, actionDelete, name, filterKeys} = this.props
+        const {Component, linkSingle, actionDelete, name, filterKeys, noDelete} = this.props
 
         return (
             <Tile title={name}>
@@ -55,7 +60,7 @@ class Lister extends React.Component {
                     )}
                 <div className="lister-items">
                     <h2>
-                        {`Pokazuje: (${items.length}/${allItems.length})`}
+                        {`Pokazuje: (${items.length}/${allItems?.length || 0})`}
                     </h2>
                     {
                         items.length === 0 ? (
@@ -75,12 +80,12 @@ class Lister extends React.Component {
                                                     </div>
                                                 </NavLink>
                                             </div>
-                                            <input
+                                            {!noDelete && <input
                                                 type="button"
                                                 className="small right warn"
                                                 value="Usuń"
                                                 onClick={() => actionDelete(item.id)}
-                                            />
+                                            />}
                                         </div>
                                     </div>
                                 ))}
@@ -103,6 +108,7 @@ Lister.defaultProps = {
         skip: ["id"],
         only: [],
     },
+    noDelete: false
 }
 
 export default Lister

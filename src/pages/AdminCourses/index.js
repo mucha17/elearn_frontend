@@ -5,52 +5,25 @@ import {NavLink} from "react-router-dom";
 import Loader from "../../components/Loader";
 import Lister from "../../components/lister";
 import Tile from "../../components/Tile";
+import database from "../../database"
 
 class AdminCourses extends React.Component {
     state = {
         courses: [],
-        leftMenu: [
-            {
-                id: 0,
-                name: "Kursy",
-                to: "/admin/courses/",
-            },
-            {
-                id: 1,
-                name: "Moduły",
-                to: "/admin/modules/",
-            },
-            {
-                id: 2,
-                name: "Lekcje",
-                to: "/admin/lessons/",
-            },
-        ]
-    }
-
-    getCreatingItem = () => {
-        return {
-            id: 0,
-            title: "Nowy",
-            description: "Przejdź tutaj aby utworzyć nowy kurs.",
-            url: "/admin/courses/new",
-        };
+        leftMenu: []
     }
 
     async componentDidMount() {
-        let {courses} = this.state;
+        let {courses, leftMenu} = this.state;
 
-        courses = await fetch('http://localhost:8080/api/courses')
-            .then(res => res.json())
-            .then(data => {
-                return data || [];
-            })
-            .catch((err) => {
-                console.log(err);
-                return [];
-            });
+        courses = await database.get("courses");
+        leftMenu = courses;
 
-        this.setState({courses});
+        for (let menuItem in leftMenu) {
+            leftMenu[menuItem].url = "/admin/courses/" + leftMenu[menuItem].id;
+        }
+
+        this.setState({courses, leftMenu});
     }
 
     render() {
@@ -88,11 +61,11 @@ class AdminCourses extends React.Component {
                     </NavLink>
                 </Tile>
                 <Lister
+                    name={'Kursy'}
                     items={courses}
                     Component={({title}) => <div className="error">{title}</div>}
                     actionDelete={(id) => console.log(id)}
                     linkSingle={`admin/courses`}
-                    name={"No title given"}
                     filterKeys={{
                         skip: ["id"],
                         only: [],

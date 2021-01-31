@@ -1,53 +1,69 @@
 import React from "react";
+import {withRouter} from "react-router-dom";
 import Layout from "../../components/Layout";
-import ItemTile from "../../components/ItemTile";
+import {NavLink} from "react-router-dom";
 import Loader from "../../components/Loader";
+import Lister from "../../components/lister";
+import Tile from "../../components/Tile";
+import database from "../../database"
 
 class Courses extends React.Component {
     state = {
-        courses: []
+        courses: [],
+        leftMenu: []
     }
 
     async componentDidMount() {
-        let {courses} = this.state;
+        let {courses, leftMenu} = this.state;
 
-        courses = await fetch('http://localhost:8080/api/courses')
-            .then(res => res.json())
-            .then(data => {
-                return data || [];
-            })
-            .catch((err) => {
-                console.log(err);
-                return [];
-            });
+        courses = await database.get("courses");
+        leftMenu = courses;
 
-        this.setState({courses});
+        for (let menuItem in leftMenu) {
+            leftMenu[menuItem].url = "/admin/courses/" + leftMenu[menuItem].id;
+            leftMenu[menuItem].to = "/admin/courses/" + leftMenu[menuItem].id;
+        }
+
+        this.setState({courses, leftMenu});
     }
 
     render() {
-        const {courses} = this.state;
+        const {leftMenu, courses} = this.state;
 
         if (courses.length === 0) {
-            return <Layout header={{title: 'kursy'}}
-                           title={"Courses"}
-                           smallTiles>
-                <Loader/>
-            </Layout>
+            return (
+                <Layout
+                    header={{title: "Kursy", description: "Strona admina ze wszystkimi kursami"}}
+                    title="Kursy"
+                    smallTiles
+                    leftMenu={leftMenu}
+                    hideAll
+                />
+            )
         }
+
         return (
-            <Layout header={{title: 'kursy', description: "Wszystkie kursy koła naukowego IoTes"}} title={"Courses"}
-                    smallTiles leftMenu={courses}>
-                {courses.map(course => (
-                    <ItemTile
-                        title={course.name}
-                        description={course.description}
-                        url={course.to}
-                        type={"course"}
-                    />
-                ))}
+            <Layout
+                header={{title: "Kursy", description: "Strona ze wszystkimi kursami"}}
+                title="Kursy"
+                smallTiles
+                leftMenu={leftMenu}
+                hideAll
+            >
+                <Lister
+                    name={'Kursy'}
+                    items={courses}
+                    Component={({name}) => <div className="error">{name}</div>}
+                    linkSingle={`courses`}
+                    noDelete
+                    filterKeys={{
+                        skip: ["id"],
+                        only: [],
+                    }}
+                />
             </Layout>
         );
     }
-};
+}
 
-export default Courses;
+export default withRouter(Courses);
