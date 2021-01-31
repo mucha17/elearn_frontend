@@ -53,11 +53,16 @@ class Courses extends React.Component {
                 <Lister
                     name={'Kursy'}
                     items={courses}
-                    Component={({name}) => <div className="error">{name}</div>}
+                    Component={({name}) => <div style={{
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        alignItems: "center",
+                        height: "100%"
+                    }}>{name}</div>}
                     linkSingle={`courses`}
                     noDelete
                     filterKeys={{
-                        skip: ["id"],
+                        skip: ["id", "key", "condition", "created_at", "updated_at", "url", "to"],
                         only: [],
                     }}
                 />

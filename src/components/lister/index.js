@@ -47,6 +47,7 @@ class Lister extends React.Component {
         const {items, allItems, filteredItems} = this.state
         const {Component, linkSingle, actionDelete, name, filterKeys, noDelete} = this.props
 
+
         return (
             <Tile title={name}>
                 {

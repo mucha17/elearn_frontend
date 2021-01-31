@@ -68,6 +68,7 @@ class Filter extends React.Component {
     componentDidMount() {
         const {items, skipKeys, onlyKeys} = this.props
 
+
         if (onlyKeys.length === 0) {
             this.getKeys(items, skipKeys)
         } else {
