@@ -38,10 +38,10 @@ class LessonForm extends React.Component {
         let returne = false
 
         if (object.id) {
-            returne = await database.post('lessons' + object.id, () => {
+            returne = await database.update('modules/' + object.module_id + '/lessons/' + object.id, () => {
             }, form)
         } else {
-            returne = await database.post('lessons', () => {
+            returne = await database.post('modules/' + object.module_id + '/lessons/', () => {
             }, form)
         }
 
