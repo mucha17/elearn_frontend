@@ -4,7 +4,7 @@ import {removeNotification} from "../redux/actions/notification"
 
 class Notification extends React.Component {
     state = {
-        counter: 5000,
+        counter: 1000,
         step: 10,
         countDown: true,
         status: {

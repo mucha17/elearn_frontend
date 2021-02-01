@@ -71,7 +71,7 @@ class Lister extends React.Component {
                         ) : (
                             <React.Fragment>
                                 {items.map((item) => (
-                                    <div className="lister-outer-item-wrapper" key={item.key}>
+                                    <div className="lister-outer-item-wrapper" key={item.key || item.id}>
                                         <input type="checkbox" className='hidden' name={item.key} id={item.key}/>
                                         <div className="lister-item" key={item.key}>
                                             <div className="lister-item-wrapper">

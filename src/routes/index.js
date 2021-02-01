@@ -19,7 +19,7 @@ export const AppRouter = () => {
         <Switch>
             {routes.map((route) => (
                 <Route
-                    key={route.id}
+                    key={route.key}
                     exact={route.exact}
                     path={route.to}
                     component={() => route.component}
