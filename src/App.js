@@ -1,6 +1,6 @@
 import React from "react";
-import {ReactKeycloakProvider} from "@react-keycloak/web";
-import keycloak from "./keycloak";
+// import {ReactKeycloakProvider} from "@react-keycloak/web";
+// import keycloak from "./keycloak";
 import {BrowserRouter} from "react-router-dom";
 import AppLayout from "./layouts/Default";
 import store from "./redux/store";
