@@ -15,21 +15,16 @@ const remove = async (url, action) => {
         addNotification({status: "processing", title: "Deleting..."}),
     )
 
-    return await axios.delete(url)
-        .then((res) => res.json())
-        .then((data) => {
-            store.dispatch(addNotification({status: "success"}))
-            store.dispatch(action)
-        })
-        .catch((err) => {
-            console.error(err)
-            store.dispatch(
-                addNotification({
-                    status: "failure",
-                    message: JSON.stringify(err, null, 2),
-                }),
-            )
-        })
+    if (await axios.delete(url)) {
+        store.dispatch(addNotification({status: "success"}))
+    } else {
+        store.dispatch(
+            addNotification({
+                status: "failure",
+            }),
+        )
+    }
+
 }
 
 export default remove
