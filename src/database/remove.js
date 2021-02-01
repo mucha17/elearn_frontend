@@ -1,6 +1,7 @@
 import {addNotification} from "../redux/actions/notification"
 import store from "../redux/store"
 import * as CFG from "./config"
+import axios from "axios";
 
 const remove = async (url, action) => {
     // FIXME: more-action notification
@@ -14,7 +15,7 @@ const remove = async (url, action) => {
         addNotification({status: "processing", title: "Deleting..."}),
     )
 
-    return await fetch(url, {method: "POST"})
+    return await axios.delete(url)
         .then((res) => res.json())
         .then((data) => {
             store.dispatch(addNotification({status: "success"}))

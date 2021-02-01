@@ -77,7 +77,7 @@ class AdminModules extends React.Component {
                         alignItems: "center",
                         height: "100%"
                     }}>{name}</div>}
-                    actionDelete={async (id) => database.remove('modules/delete/' + id)}
+                    actionDelete={async (id) => database.remove('modules/' + id)}
                     linkSingle={`admin/modules`}
                     filterKeys={{
                         skip: ["id", "to", "created_at", "updated_at", "url", "course_id"],
