@@ -10,7 +10,7 @@ const update = async (url, action, form) => {
         addNotification({status: "processing", title: "Updating..."}),
     )
 
-    return axios.put(url, {form})
+    return axios.put(url, form)
         .then((info) => {
             return CFG.handleStatus(info, action)
         })
