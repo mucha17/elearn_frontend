@@ -38,6 +38,7 @@ class AdminCourses extends React.Component {
         // lessons = await database.get("lessons/get");
         lessons = await database.get("modules/" + mid + "/lessons");
         let newLessons = []
+        this.setState({wf:false})
         Object.keys(lessons).map(x => {
             lessons[x].id = x;
             newLessons.push(lessons[x])
@@ -70,6 +71,7 @@ class AdminCourses extends React.Component {
     render() {
         const {leftMenu, lessons, wf, modules, mid} = this.state;
 
+        console.log(lessons)
         if (!wf) {
             return (
                 <Layout
@@ -140,7 +142,7 @@ class AdminCourses extends React.Component {
                 <Lister
                     name={'Lekcje'}
                     items={lessons}
-                    Component={({name, id}) => <div
+                    Component={({name, id}) => <div key={mid+id}
                         style={{
                             display: "flex",
                             justifyContent: "space-between",

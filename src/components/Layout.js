@@ -6,6 +6,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import Notifications from "./Notifications";
 import TextInput from "./inputs/TextInput";
 import SubmitInput from "./inputs/SubmitInput";
+import Tile from "./Tile";
 
 class Layout extends React.Component {
     state = {
@@ -64,10 +65,16 @@ class Layout extends React.Component {
                 height: "100vh"
             }}>
                 <form onSubmit={this.handleSimpleLogin}>
+                    <Tile title={"Dane do logowania"}>
+                        Użytkownik konsumencki: user/user<br />
+                        Użytkownik administracyjny: admin/admin
+                    </Tile>
                     <TextInput name={'login'} title={'Login'}/>
                     <TextInput name={'password'} title={'Hasło'} isPassword/>
                     <SubmitInput text={'Zaloguj'}/>
+
                 </form>
+
             </div>
         }
 

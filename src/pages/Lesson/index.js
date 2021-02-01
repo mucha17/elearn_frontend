@@ -52,9 +52,9 @@ class Lesson extends React.Component {
         }
 
         return (
-            <React.Fragment>
+            <div className={"input-wrapper"}>
                 <h2 className={'lesson-title'}>
-                    Zawartość dodatkowa
+                    Zawartość lekcji
                 </h2>
                 {type === "DOCUMENT" && (
                     <embed src={url} width="100%" height="auto"/>
@@ -63,9 +63,9 @@ class Lesson extends React.Component {
                     <audio src={url} width="100%" height="auto"/>
                 )}
                 {type === "VIDEO" && (
-                    <iframe src={url} width="100%" height="auto"/>
+                    <iframe src={url} />
                 )}
-            </React.Fragment>
+            </div>
         )
     }
 
@@ -83,9 +83,9 @@ class Lesson extends React.Component {
                 <h2 className={'lesson-title'}>
                     {object.name}
                 </h2>
-                <p className={'lesson-description'}>
+                {object.description?.length > 0 && <p className={'lesson-description'}>
                     {object.description}
-                </p>
+                </p>}
                 <div>
                     {object && object.contents && object.contents.map(content => {
                         return this.renderFile(content.type, content.url)
