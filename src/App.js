@@ -9,19 +9,19 @@ import {Provider} from "react-redux"
 const App = () => {
     return (
         <Provider store={store}>
-            <ReactKeycloakProvider
-                authClient={keycloak}
-                onEvent={(event, error) => {
-                    console.log("onKeycloakEvent", event, error);
-                }}
-                onTokens={(tokens) => {
-                    console.log("onKeycloakTokens", tokens);
-                }}
-            >
+            {/*<ReactKeycloakProvider*/}
+            {/*    authClient={keycloak}*/}
+            {/*    onEvent={(event, error) => {*/}
+            {/*        console.log("onKeycloakEvent", event, error);*/}
+            {/*    }}*/}
+            {/*    onTokens={(tokens) => {*/}
+            {/*        console.log("onKeycloakTokens", tokens);*/}
+            {/*    }}*/}
+            {/*>*/}
                 <BrowserRouter>
                     <AppLayout/>
                 </BrowserRouter>
-            </ReactKeycloakProvider>
+            {/*</ReactKeycloakProvider>*/}
         </Provider>
     );
 };

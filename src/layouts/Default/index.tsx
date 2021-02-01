@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "moment/locale/pl";
 import strings from "./strings";
-import { useKeycloak } from "@react-keycloak/web";
+// import { useKeycloak } from "@react-keycloak/web";
 import { AppRouter } from "../../routes/index";
 
 const AppLayout = (): JSX.Element => {
-	const { initialized } = useKeycloak();
+	// const { initialized } = useKeycloak();
 
 	const selectedLanguage =
 		localStorage.getItem("selectedLanguage")?.toString() ?? "pl";
