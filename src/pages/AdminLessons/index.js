@@ -9,7 +9,9 @@ import database from "../../database"
 
 class AdminCourses extends React.Component {
     state = {
+        wf: false,
         lessons: [],
+        modules: [],
         leftMenu: [
             {
                 id: 0,
@@ -29,17 +31,66 @@ class AdminCourses extends React.Component {
         ]
     }
 
-    async componentDidMount() {
+    selectChange = async (event) => {
         let {lessons} = this.state;
+        const mid = event.currentTarget.value;
 
-        lessons = await database.get("lessons/get");
+        // lessons = await database.get("lessons/get");
+        lessons = await database.get("modules/" + mid + "/lessons");
+        let newLessons = []
+        Object.keys(lessons).map(x => {
+            lessons[x].id = x;
+            newLessons.push(lessons[x])
+        })
 
-        this.setState({lessons});
+        lessons = newLessons
+
+        this.setState({lessons, wf: true, mid});
+    }
+
+    async componentDidMount() {
+        let {modules, lessons} = this.state;
+
+        modules = await database.get('modules')
+        const mid = modules[0]?.id || 0;
+
+        lessons = await database.get("modules/" + mid + "/lessons");
+        let newLessons = []
+        Object.keys(lessons).map(x => {
+            lessons[x].id = x;
+            newLessons.push(lessons[x])
+        })
+
+        lessons = newLessons
+
+        this.setState({lessons, wf: true, mid});
+        this.setState({modules})
     }
 
     render() {
-        const {leftMenu, lessons} = this.state;
+        const {leftMenu, lessons, wf, modules, mid} = this.state;
 
+        if (!wf) {
+            return (
+                <Layout
+                    header={{title: "Admin - lekcje", description: "Strona admina ze wszystkimi lekcjami"}}
+                    title="Admin - lekcje"
+                    smallTiles
+                    leftMenu={leftMenu}
+                    hideAll
+                >
+                    <Tile title={'Wybierz moduł'}>
+                        <div className={'input-wrapper'}>
+                            <select onChange={this.selectChange}
+                                    style={{width: '100%', margin: '0 auto'}}>
+                                {modules.map(mod => <option value={mod.id}>{mod.name}</option>)}
+                            </select>
+                        </div>
+                    </Tile>
+                    <Loader/>
+                </Layout>
+            )
+        }
         if (lessons.length === 0) {
             return (
                 <Layout
@@ -49,11 +100,19 @@ class AdminCourses extends React.Component {
                     leftMenu={leftMenu}
                     hideAll
                 >
+                    <Tile title={'Wybierz moduł'}>
+                        <div className={'input-wrapper'}>
+                            <select onChange={this.selectChange} style={{width: '100%', margin: '0 auto'}}>
+                                {modules.map(mod => <option value={mod.id}>{mod.name}</option>)}
+                            </select>
+                        </div>
+                    </Tile>
                     <Tile title={"Akcje"}>
-                        <NavLink to={'/admin/lessons/new'}>
+                        <NavLink to={`/admin/lessons/${mid}/new`}>
                             <input type={'button'} value={'Stwórz nową'}/>
                         </NavLink>
                     </Tile>
+                    <div className={'error'}>Brak danych</div>
                     <Loader/>
                 </Layout>
             )
@@ -66,8 +125,15 @@ class AdminCourses extends React.Component {
                 leftMenu={leftMenu}
                 hideAll
             >
+                <Tile title={'Wybierz moduł'}>
+                    <div className={'input-wrapper'}>
+                        <select onChange={this.selectChange} style={{width: '100%', margin: '0 auto'}}>
+                            {modules.map(mod => <option value={mod.id}>{mod.name}</option>)}
+                        </select>
+                    </div>
+                </Tile>
                 <Tile title={"Akcje"}>
-                    <NavLink to={'/admin/lessons/new'}>
+                    <NavLink to={`/admin/lessons/${mid}/new`}>
                         <input type={'button'} value={'Stwórz nową'}/>
                     </NavLink>
                 </Tile>
@@ -81,8 +147,8 @@ class AdminCourses extends React.Component {
                             alignItems: "center",
                             height: "100%"
                         }}>{name}</div>}
-                    actionDelete={async (id) => database.remove('lessons/' + id)}
-                    linkSingle={`admin/lessons`}
+                    actionDelete={async (id) => database.remove('modules/' + mid + '/lessons/' + id)}
+                    linkSingle={`admin/lessons/${mid}`}
                     filterKeys={{
                         skip: ["id", "url", "content_type", "content_url", "module_id", "created_at", "updated_at"],
                         only: [],

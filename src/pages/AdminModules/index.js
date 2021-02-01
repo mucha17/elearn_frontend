@@ -1,8 +1,6 @@
 import React from "react";
 import {NavLink, withRouter} from "react-router-dom";
 import Layout from "../../components/Layout";
-import ItemTile from "../../components/ItemTile";
-import Loader from "../../components/Loader";
 import Tile from "../../components/Tile";
 import Lister from "../../components/lister";
 import database from "../../database";

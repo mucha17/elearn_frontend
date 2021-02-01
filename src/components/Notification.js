@@ -4,7 +4,7 @@ import {removeNotification} from "../redux/actions/notification"
 
 class Notification extends React.Component {
     state = {
-        counter: 1000,
+        counter: 500,
         step: 10,
         countDown: true,
         status: {
@@ -56,6 +56,12 @@ class Notification extends React.Component {
         let {title, message} = this.props
         let {status, counter} = this.state
         const buttonClass = "button absolute right " + status.button
+
+        // console.log(status, statuses)
+
+        if (status.name !== statuses[0].name) {
+            return <React.Fragment/>
+        }
 
         return (
             <div

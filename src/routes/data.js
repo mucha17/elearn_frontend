@@ -94,7 +94,7 @@ export const routes = [
     {
         key: 10,
         exact: true,
-        to: "/admin/lessons/:id",
+        to: "/admin/lessons/:moduleId/:id",
         component: <AdminLesson/>,
     },
 ];

@@ -18,7 +18,10 @@ class Module extends React.Component {
         lessons = await database.get("modules/" + module + "/lessons")
 
         let newLessons = []
-        Object.keys(lessons).map(x => newLessons.push(lessons[x]))
+        Object.keys(lessons).map(x => {
+            lessons[x].id = x;
+            newLessons.push(lessons[x])
+        })
 
         lessons = newLessons
         leftMenu = lessons;
@@ -26,8 +29,11 @@ class Module extends React.Component {
         for (let i in leftMenu) {
             leftMenu[i].to = `/courses/${name}/${module}/${leftMenu[i].id}`
             leftMenu[i].key = Math.random()
+            // leftMenu[i].key = Math.random()
             leftMenu[i].condition = true
         }
+
+        console.log(lessons)
 
         this.setState({lessons, leftMenu});
     }
@@ -36,14 +42,16 @@ class Module extends React.Component {
         const {name, module} = this.props.match.params;
         const {lessons, leftMenu} = this.state;
 
+
         if (lessons.length === 0) {
-            return <Layout header={{title: `Kurs ${name}, moduł ${module} - lekcje`}}
-                           title={`Kurs ${name}, moduł ${module} - lekcje`}
-                           leftMenu={leftMenu}
-                           smallTiles>
+            return (<Layout header={{title: `Kurs ${name}, moduł ${module} - lekcje`}}
+                            title={`Kurs ${name}, moduł ${module} - lekcje`}
+                            leftMenu={leftMenu}
+                            smallTiles>
                 Brak lekcji
-            </Layout>
+            </Layout>)
         }
+
         return (
             <Layout
                 header={{title: `Kurs ${name}, moduł ${module} - lekcje`, description: "Lekcje " + module}}

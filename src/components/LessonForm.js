@@ -12,12 +12,16 @@ class LessonForm extends React.Component {
 
     async componentDidMount() {
         let {modules, object} = this.state;
-        const {id} = this.props.match.params;
+        const {moduleId, id} = this.props.match.params;
 
         modules = await database.get('modules');
         if (id !== "new") {
-            object = await database.get('lessons' + id);
+            object = await database.get('modules/' + moduleId + '/lessons/' + id);
         }
+        object.id = id;
+        object.module_id = moduleId;
+
+        // console.log(id, object)
 
         this.setState({modules, object});
     }
@@ -28,20 +32,25 @@ class LessonForm extends React.Component {
         const {id, content} = x;
         const content_url = content;
         const {object, form} = functions.createForm(event, {
-            description: event.target[2].value,
-            module_id: event.target[3].value,
-            content_type: 'file',
-            id,
-            content_url
+            description: event.target[1].value,
+            // module_id: event.target[3].value,
+            // content_type: 'file',
+            // id,
+            // content_url
         });
+
+
+        const {moduleId} = this.props.match.params;
+        const xxx = this.props.match.params.id
+        console.log(object)
 
         let returne = false
 
-        if (object.id) {
-            returne = await database.update('modules/' + object.module_id + '/lessons/' + object.id, () => {
+        if (xxx !== "new") {
+            returne = await database.update('modules/' + moduleId + '/lessons/' + xxx, () => {
             }, form)
         } else {
-            returne = await database.post('modules/' + object.module_id + '/lessons/', () => {
+            returne = await database.post('modules/' + moduleId + '/lessons/', () => {
             }, form)
         }
 
@@ -64,7 +73,7 @@ class LessonForm extends React.Component {
 
         return (
             <form onSubmit={(event) => this.submitForm(event)}>
-                <input type="hidden" name={"module_id"} value={id}/>
+                {/*<input type="hidden" name={"module_id"} value={id}/>*/}
                 <div className={'input-wrapper'}>
                     <label for={"name"}>Tytuł</label>
                     <input id={"title"} type="text" name="name" defaultValue={name}/>
@@ -79,24 +88,24 @@ class LessonForm extends React.Component {
                     >
 			            </textarea>
                 </div>
-                <div className={'input-wrapper'}>
-                    <label htmlFor={"course_id"}>Moduł</label>
-                    <select id={"course_id"}>
-                        {modules.map((module) => (
-                            <option
-                                key={module.id}
-                                value={module.id}
-                                selected={module_id === module.id}
-                            >
-                                {module.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-                <div className={'input-wrapper'}>
-                    <label htmlFor={"fileUrl"}>{name ? 'Zmień plik' : 'Plik'}</label>
-                    <input id={"fileUrl"} type="file" name="content"/>
-                </div>
+                {/*<div className={'input-wrapper'}>*/}
+                {/*    {!name && <label htmlFor={"course_id"}>Moduł</label>*/}
+                {/*    } {!name && <select id={"course_id"}>*/}
+                {/*    {modules.map((module) => (*/}
+                {/*        <option*/}
+                {/*            key={module.id}*/}
+                {/*            value={module.id}*/}
+                {/*            selected={module_id === module.id}*/}
+                {/*        >*/}
+                {/*            {module.name}*/}
+                {/*        </option>*/}
+                {/*    ))}*/}
+                {/*</select>*/}
+                {/*}             </div>*/}
+                {/*<div className={'input-wrapper'}>*/}
+                {/*    <label htmlFor={"fileUrl"}>{name ? 'Zmień plik' : 'Plik'}</label>*/}
+                {/*    <input id={"fileUrl"} type="file" name="content"/>*/}
+                {/*</div>*/}
                 <SubmitInput text={name ? 'Aktualizuj' : 'Dodaj'}/>
             </form>
         );

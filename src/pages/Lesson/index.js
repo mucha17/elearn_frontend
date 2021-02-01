@@ -15,14 +15,33 @@ class Lesson extends React.Component {
         let {leftMenu} = this.state;
 
         const {name, module, lesson} = this.props.match.params;
-        leftMenu = await database.get('courses/' + name + "/modules/" + module + "/lessons")
-        const object = await database.get('courses/' + name + "/modules/" + module + "/lesson/" + lesson)
+        leftMenu = await database.get("modules/" + module + "/lessons")
+        const object = await database.get("modules/" + module + "/lessons/" + lesson)
+        const cnt = await database.get("modules/" + module + "/lessons/" + lesson + "/contents")
+
+        let newLessons = []
+        Object.keys(leftMenu).map(x => {
+            leftMenu[x].id = x;
+            newLessons.push(leftMenu[x])
+        })
+
+        leftMenu = newLessons
+        // leftMenu = lessons;
+
+        const items = [];
+        Object.keys(cnt).map(x => {
+            cnt[x].id = x;
+            items.push(cnt[x])
+        })
+        object.contents = items;
 
         for (let i in leftMenu) {
             leftMenu[i].to = `/courses/${name}/${module}/${leftMenu[i].id}`
             leftMenu[i].key = Math.random()
             leftMenu[i].condition = true
         }
+
+        // console.log(leftMenu, object)
 
         this.setState({leftMenu, object});
     }
@@ -37,14 +56,14 @@ class Lesson extends React.Component {
                 <h2 className={'lesson-title'}>
                     Zawartość dodatkowa
                 </h2>
-                {type === "file" && (
+                {type === "DOCUMENT" && (
                     <embed src={url} width="100%" height="auto"/>
                 )}
-                {type === "image" && (
+                {type === "IMAGE" && (
                     <img src={url} width="100%" height="auto"/>
                 )}
-                {type === "video" && (
-                    <video src={url} width="100%" height="auto"/>
+                {type === "VIDEO" && (
+                    <iframe src={url} width="100%" height="auto"/>
                 )}
             </React.Fragment>
         )
@@ -67,7 +86,12 @@ class Lesson extends React.Component {
                 <p className={'lesson-description'}>
                     {object.description}
                 </p>
-                {this.renderFile(object.content_type, object.content_url)}
+                <div>
+                    {object && object.contents && object.contents.map(content => {
+                        return this.renderFile(content.type, content.url)
+                    })}
+                </div>
+                {/*{this.renderFile(object.content_type, object.content_url)}*/}
             </Layout>
         );
     }
