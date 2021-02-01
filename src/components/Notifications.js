@@ -30,6 +30,8 @@ class Notifications extends React.Component {
     render() {
         const {notifications} = this.state
 
+        return <React.Fragment/>
+
         return (
             <div className="notification-wrapper">
                 <div className="notification-inner-wrapper">

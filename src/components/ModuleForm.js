@@ -3,6 +3,7 @@ import {NavLink, withRouter} from "react-router-dom";
 import database from "../database"
 import functions from "../functions"
 import SubmitInput from "./inputs/SubmitInput";
+import axios from "axios";
 
 class ModuleForm extends React.Component {
     state = {
@@ -12,11 +13,11 @@ class ModuleForm extends React.Component {
 
     async componentDidMount() {
         let {courses, object} = this.state;
-        const {id} = this.props.match.params;
+        const {name} = this.props.match.params;
 
         courses = await database.get('courses');
-        if (id !== "new") {
-            object = await database.get('modules' + id);
+        if (name !== "new") {
+            object = await database.get('modules' + name);
         }
 
         this.setState({courses, object});
@@ -26,17 +27,27 @@ class ModuleForm extends React.Component {
         event.preventDefault();
         const {object, form} = functions.createForm(event, {
             description: event.target[2].value,
-            course_id: event.target[3].value,
+            // course_id: event.target[3].value,
         });
+
+        const name = event.target[3].value
+
 
         let returne = false
         if (object.module_id) {
-            returne = await database.post('modules' + object.module_id, () => {
+            returne = await database.update("modules" + object.module_id, () => {
             }, form)
         } else {
-            returne = await database.post('modules',
+            const xd = await axios.post('https://courses.kniotes.pl/api/modules', form).then((d) => {
+                return d.data
+            })
+
+            const xdForm = new FormData();
+            xdForm.append('moduleId', xd.id);
+
+            returne = await database.post("courses/" + name + '/modules',
                 () => {
-            }, form)
+                }, xdForm)
         }
 
         if (returne) {

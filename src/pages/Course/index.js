@@ -22,9 +22,11 @@ class Course extends React.Component {
         leftMenu = modules;
 
         for (let i in leftMenu) {
-            leftMenu[i].to = `/courses/${name}/${leftMenu[i].id}`
-            leftMenu[i].key = Math.random()
+            leftMenu[i].to = `/courses/${name}/${leftMenu[i].module.id}`
+            // leftMenu[i].key = Math.random()
             leftMenu[i].condition = true
+            leftMenu[i].id = leftMenu[i].module.id
+            leftMenu[i].name = leftMenu[i].module.name
         }
 
         this.setState({modules, leftMenu});
@@ -33,6 +35,8 @@ class Course extends React.Component {
     render() {
         const {name} = this.props.match.params;
         const {modules, leftMenu} = this.state;
+
+        console.log(modules)
 
         if (modules.length === 0) {
             return <Layout header={{title: 'moduły'}}
@@ -52,12 +56,12 @@ class Course extends React.Component {
                 <Lister
                     name={'Moduły'}
                     items={modules}
-                    Component={({name}) => <div style={{
+                    Component={({module}) => <div style={{
                         display: "flex",
                         justifyContent: "flex-start",
                         alignItems: "center",
                         height: "100%"
-                    }}>{name}</div>}
+                    }}>{module.name}</div>}
                     noDelete
                     linkSingle={`courses/${name}`}
                     filterKeys={{
