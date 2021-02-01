@@ -62,12 +62,14 @@ export const routes = [
         exact: true,
         to: "/admin",
         component: <Admin/>,
+        role: 'token_admin'
     },
     {
         key: 5,
         exact: true,
         to: "/admin/courses",
         component: <AdminCourses/>,
+        role: 'token_admin'
     },
     {
 
@@ -75,6 +77,7 @@ export const routes = [
         exact: true,
         to: "/admin/modules/:moduleId/lesson/:id/contents",
         component: <AdminLessonContents/>,
+        role: 'token_admin'
     },
     {
 
@@ -82,35 +85,41 @@ export const routes = [
         exact: true,
         to: "/admin/modules/:moduleId/lessons/:id/contents/:cid",
         component: <AdminLessonContent/>,
+        role: 'token_admin'
     },
     {
         key: 6,
         exact: true,
         to: "/admin/modules",
         component: <AdminModules/>,
+        role: 'token_admin'
     },
     {
         key: 7,
         exact: true,
         to: "/admin/lessons",
         component: <AdminLessons/>,
+        role: 'token_admin'
     },
     {
         key: 8,
         exact: true,
         to: "/admin/courses/:id",
         component: <AdminCourse/>,
+        role: 'token_admin'
     },
     {
         key: 9,
         exact: true,
         to: "/admin/modules/:id",
         component: <AdminModule/>,
+        role: 'token_admin'
     },
     {
         key: 10,
         exact: true,
         to: "/admin/lessons/:moduleId/:id",
         component: <AdminLesson/>,
+        role: 'token_admin'
     },
 ];
