@@ -29,7 +29,7 @@ class Lesson extends React.Component {
 
     renderFile = (type, url) => {
         if (!type) {
-            return <div>Brak zawartości ekstra</div>
+            return <div>Brak zawartości dodatkowej</div>
         }
 
         return (
