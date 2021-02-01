@@ -28,7 +28,7 @@ const MenuLeft = ({items, match, hideAll}) => {
                             <MenuLeftItem
                                 key={item.id}
                                 name={item.name}
-                                to={item.to}
+                                to={`${item.to}`}
                                 action={item.action}
                                 condition={item.condition}
                             />
@@ -53,7 +53,7 @@ const MenuLeft = ({items, match, hideAll}) => {
                         <MenuLeftItem
                             key={item.id}
                             name={item.name}
-                            to={item.to}
+                            to={`${item.to}`}
                             action={item.action}
                             condition={item.condition}
                         />

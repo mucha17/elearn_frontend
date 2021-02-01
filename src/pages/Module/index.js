@@ -1,42 +1,66 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
 import Layout from "../../components/Layout";
-import ItemTile from "../../components/ItemTile";
+import Loader from "../../components/Loader";
+import database from "../../database"
+import Lister from "../../components/lister";
 
 class Module extends React.Component {
+    state = {
+        lessons: [],
+        leftMenu: []
+    }
+
+    async componentDidMount() {
+        let {lessons, leftMenu} = this.state;
+
+        const {name, module} = this.props.match.params;
+        lessons = await database.get('lessons/get-by/' + module)
+        leftMenu = lessons;
+
+        for (let i in leftMenu) {
+            leftMenu[i].to = `/courses/${name}/${module}/${leftMenu[i].id}`
+            leftMenu[i].key = Math.random()
+            leftMenu[i].condition = true
+        }
+
+        this.setState({lessons, leftMenu});
+    }
+
     render() {
         const {name, module} = this.props.match.params;
+        const {lessons, leftMenu} = this.state;
 
-        const leftMenu = [
-            {
-                id: 0,
-                name: "Lesson 1",
-                to: "/courses/java/ee/0",
-            },
-        ];
-
+        if (lessons.length === 0) {
+            return <Layout header={{title: `Kurs ${name}, moduł ${module} - lekcje`}}
+                           title={`Kurs ${name}, moduł ${module} - lekcje`}
+                           leftMenu={leftMenu}
+                           smallTiles>
+                Brak lekcji
+            </Layout>
+        }
         return (
             <Layout
-                header={{title: 'moduł ' + module, description: "Moduł " + module + " kursu " + name}}
-                title={`${name} - ${module}`}
+                header={{title: `Kurs ${name}, moduł ${module} - lekcje`, description: "Lekcje " + module}}
+                title={`Kurs ${name}, moduł ${module} - lekcje`}
                 smallTiles
                 leftMenu={leftMenu}
             >
-                <ItemTile
-                    title={"Wprowadzenie"}
-                    description={
-                        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
-                    }
-                    url={"/courses/java/ee/0"}
-                    type={"lesson"}
-                />
-                <ItemTile
-                    title={"Podsumowanie"}
-                    description={
-                        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
-                    }
-                    url={"/courses/php/80/0"}
-                    type={"lesson"}
+                <Lister
+                    name={'Moduły'}
+                    items={lessons}
+                    Component={({name}) => <div style={{
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        alignItems: "center",
+                        height: "100%"
+                    }}>x{name}</div>}
+                    noDelete
+                    linkSingle={`courses/${name}/${module}`}
+                    filterKeys={{
+                        skip: ["id", "created_at", "updated_at", "url", "course_id", "to"],
+                        only: ['name', 'description'],
+                    }}
                 />
             </Layout>
         );

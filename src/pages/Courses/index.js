@@ -20,8 +20,8 @@ class Courses extends React.Component {
         leftMenu = courses;
 
         for (let menuItem in leftMenu) {
-            leftMenu[menuItem].url = "/admin/courses/" + leftMenu[menuItem].id;
-            leftMenu[menuItem].to = "/admin/courses/" + leftMenu[menuItem].id;
+            leftMenu[menuItem].url = "/courses/" + leftMenu[menuItem].id;
+            leftMenu[menuItem].to = "/courses/" + leftMenu[menuItem].id;
         }
 
         this.setState({courses, leftMenu});
@@ -38,7 +38,9 @@ class Courses extends React.Component {
                     smallTiles
                     leftMenu={leftMenu}
                     hideAll
-                />
+                >
+                    Brak kursów
+                </Layout>
             )
         }
 

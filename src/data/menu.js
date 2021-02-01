@@ -26,10 +26,7 @@ export const top = [
     {
         id: 4,
         name: "Login",
-        action: () => {
-            console.log("login");
-        },
         to: "/login",
-        condition: false,
+        condition: true,
     },
 ];

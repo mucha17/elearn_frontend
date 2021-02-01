@@ -22,7 +22,7 @@ class Course extends React.Component {
         leftMenu = modules;
 
         for (let i in leftMenu) {
-            leftMenu[i].to = `courses/${name}/${leftMenu[i].id}`
+            leftMenu[i].to = `/courses/${name}/${leftMenu[i].id}`
             leftMenu[i].key = Math.random()
             leftMenu[i].condition = true
         }
@@ -39,7 +39,7 @@ class Course extends React.Component {
                            title={"Moduły"}
                            leftMenu={leftMenu}
                            smallTiles>
-                <Loader/>
+                Brak modułów
             </Layout>
         }
         return (
