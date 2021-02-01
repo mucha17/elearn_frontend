@@ -14,9 +14,9 @@ class LessonForm extends React.Component {
         let {modules, object} = this.state;
         const {id} = this.props.match.params;
 
-        modules = await database.get('modules/get');
+        modules = await database.get('modules');
         if (id !== "new") {
-            object = await database.get('lessons/get/' + id);
+            object = await database.get('lessons' + id);
         }
 
         this.setState({modules, object});
@@ -38,10 +38,10 @@ class LessonForm extends React.Component {
         let returne = false
 
         if (object.id) {
-            returne = await database.post('lessons/update/' + object.id, () => {
+            returne = await database.post('lessons' + object.id, () => {
             }, form)
         } else {
-            returne = await database.post('lessons/create/', () => {
+            returne = await database.post('lessons', () => {
             }, form)
         }
 

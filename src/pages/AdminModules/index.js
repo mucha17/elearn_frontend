@@ -48,7 +48,11 @@ class AdminModules extends React.Component {
                 leftMenu={leftMenu}
                 hideAll
             >
-                <Loader/>
+                <Tile title={"Akcje"}>
+                    <NavLink to={'/admin/modules/new'}>
+                        <input type={'button'} value={'Stwórz nowy'}/>
+                    </NavLink>
+                </Tile>
             </Layout>
         }
         return (

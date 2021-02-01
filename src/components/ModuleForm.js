@@ -31,10 +31,11 @@ class ModuleForm extends React.Component {
 
         let returne = false
         if (object.module_id) {
-            returne = await database.post('modules/update/' + object.module_id, () => {
+            returne = await database.post('modules' + object.module_id, () => {
             }, form)
         } else {
-            returne = await database.post('modules/create/', () => {
+            returne = await database.post('modules',
+                () => {
             }, form)
         }
 
