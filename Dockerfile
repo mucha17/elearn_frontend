@@ -2,7 +2,7 @@ FROM node:alpine as builder
 WORKDIR /app
 COPY . ./
 
-RUN apk add --no-cache python2 make
+RUN apk add --no-cache python2 make g++
 
 RUN yarn install
 
