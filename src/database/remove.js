@@ -17,7 +17,7 @@ const remove = async (url, action) => {
 
     if (await axios.delete(url)) {
         store.dispatch(addNotification({status: "success"}))
-        window.location.refresh();
+        window.location.reload();
     } else {
         store.dispatch(
             addNotification({
