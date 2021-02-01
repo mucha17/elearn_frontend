@@ -67,7 +67,7 @@ class Module extends React.Component {
                         justifyContent: "flex-start",
                         alignItems: "center",
                         height: "100%"
-                    }}>x{name}</div>}
+                    }}>{name}</div>}
                     noDelete
                     linkSingle={`courses/${name}/${module}`}
                     filterKeys={{

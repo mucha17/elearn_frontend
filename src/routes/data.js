@@ -8,6 +8,8 @@ import AdminLessons from "../pages/AdminLessons";
 import AdminModules from "../pages/AdminModules";
 import AdminCourse from "../pages/AdminCourse";
 import AdminLesson from "../pages/AdminLesson";
+import AdminLessonContent from "../pages/AdminLessonContent";
+import AdminLessonContents from "../pages/AdminLessonContents";
 import AdminModule from "../pages/AdminModule";
 import LoginPage from "../pages/Login";
 import HomePage from "../pages/Home";
@@ -66,6 +68,20 @@ export const routes = [
         exact: true,
         to: "/admin/courses",
         component: <AdminCourses/>,
+    },
+    {
+
+        key: 101,
+        exact: true,
+        to: "/admin/modules/:moduleId/lesson/:id/contents",
+        component: <AdminLessonContents/>,
+    },
+    {
+
+        key: 102,
+        exact: true,
+        to: "/admin/modules/:moduleId/lessons/:id/contents/:cid",
+        component: <AdminLessonContent/>,
     },
     {
         key: 6,

@@ -140,13 +140,17 @@ class AdminCourses extends React.Component {
                 <Lister
                     name={'Lekcje'}
                     items={lessons}
-                    Component={({name}) => <div
+                    Component={({name, id}) => <div
                         style={{
                             display: "flex",
-                            justifyContent: "flex-start",
+                            justifyContent: "space-between",
                             alignItems: "center",
                             height: "100%"
-                        }}>{name}</div>}
+                        }}>{name}
+                        <NavLink to={'/admin/modules/' + mid + '/lesson/' + id + '/contents'}>
+                            <input type={'button'} value={'Zarządzaj zawartością'}/>
+                        </NavLink>
+                    </div>}
                     actionDelete={async (id) => database.remove('modules/' + mid + '/lessons/' + id)}
                     linkSingle={`admin/lessons/${mid}`}
                     filterKeys={{

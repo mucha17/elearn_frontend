@@ -59,8 +59,8 @@ class Lesson extends React.Component {
                 {type === "DOCUMENT" && (
                     <embed src={url} width="100%" height="auto"/>
                 )}
-                {type === "IMAGE" && (
-                    <img src={url} width="100%" height="auto"/>
+                {type === "PODCAST" && (
+                    <audio src={url} width="100%" height="auto"/>
                 )}
                 {type === "VIDEO" && (
                     <iframe src={url} width="100%" height="auto"/>
