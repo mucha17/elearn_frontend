@@ -1,7 +1,7 @@
 import store from "../redux/store"
 import {addNotification} from "../redux/actions/notification"
 
-export const BACKEND_URL = "http://localhost:8000/api/admin/"
+export const BACKEND_URL = "https://courses.kniotes.pl/api/"
 
 /**
  * Response status handler
@@ -24,7 +24,7 @@ export const handleStatus = ({data, status}, action) => {
             store.dispatch(
                 addNotification({
                     status: "failure",
-                    message: JSON.stringify(data.data, null, 2),
+                    message: JSON.stringify(data, null, 2),
                 }),
             )
             return false

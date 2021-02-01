@@ -16,7 +16,7 @@ class Courses extends React.Component {
     async componentDidMount() {
         let {courses, leftMenu} = this.state;
 
-        courses = await database.get("courses/get");
+        courses = await database.get("courses");
         leftMenu = courses;
 
         for (let menuItem in leftMenu) {
@@ -65,7 +65,7 @@ class Courses extends React.Component {
                     noDelete
                     filterKeys={{
                         skip: ["id", "key", "condition", "created_at", "updated_at", "url", "to"],
-                        only: [],
+                        only: ["name"],
                     }}
                 />
             </Layout>

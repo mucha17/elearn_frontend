@@ -14,9 +14,9 @@ class ModuleForm extends React.Component {
         let {courses, object} = this.state;
         const {id} = this.props.match.params;
 
-        courses = await database.get('courses/get');
+        courses = await database.get('courses');
         if (id !== "new") {
-            object = await database.get('modules/get/' + id);
+            object = await database.get('modules' + id);
         }
 
         this.setState({courses, object});

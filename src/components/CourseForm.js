@@ -10,11 +10,13 @@ const submitForm = async (event) => {
 
     let returnData = false;
 
+    form.append('instructor', 'admin');
+
     if (object.course_id) {
-        returnData = await database.update(`courses/update/${object.course_id}`, () => {
+        returnData = await database.update(`courses/${object.course_id}`, () => {
         }, form)
     } else {
-        returnData = await database.post('courses/create/', () => {
+        returnData = await database.post('courses/', () => {
         }, form)
     }
 

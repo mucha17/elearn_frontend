@@ -32,7 +32,7 @@ class AdminCourses extends React.Component {
     async componentDidMount() {
         let {courses} = this.state;
 
-        courses = await database.get("courses/get");
+        courses = await database.get("courses");
 
         this.setState({courses});
     }

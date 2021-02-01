@@ -32,7 +32,7 @@ class AdminCourse extends React.Component {
         const is_new = id === "new";
 
         if (!is_new) {
-            object = await database.get('courses/get/' + id);
+            object = await database.get('courses/' + id);
         }
 
         this.setState({object})

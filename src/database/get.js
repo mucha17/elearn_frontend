@@ -2,6 +2,8 @@ import {addNotification} from "../redux/actions/notification"
 import store from "../redux/store"
 import * as CFG from "./config"
 
+import axios from "axios";
+
 const get = async (url, silent = false) => {
     url = CFG.BACKEND_URL + url
 
@@ -11,14 +13,14 @@ const get = async (url, silent = false) => {
         )
     }
 
-    return await fetch(url)
-        .then((res) => res.json())
+    return await axios.get(url)
         .then((data) => {
+            console.log(data);
+
             if (!silent) {
                 store.dispatch(addNotification({status: "success"}))
             }
-
-            return data.data
+            return data.data || []
         })
         .catch((err) => {
             console.error(err)

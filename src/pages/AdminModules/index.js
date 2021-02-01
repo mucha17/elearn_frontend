@@ -32,7 +32,7 @@ class AdminModules extends React.Component {
     async componentDidMount() {
         let {modules} = this.state;
 
-        modules = await database.get("modules/get");
+        modules = await database.get("modules");
 
         this.setState({modules});
     }
@@ -76,7 +76,7 @@ class AdminModules extends React.Component {
                     actionDelete={async (id) => database.remove('modules/delete/' + id)}
                     linkSingle={`admin/modules`}
                     filterKeys={{
-                        skip: ["id", "to", "created_at", "updated_at", "url","course_id"],
+                        skip: ["id", "to", "created_at", "updated_at", "url", "course_id"],
                         only: [],
                     }}
                 />

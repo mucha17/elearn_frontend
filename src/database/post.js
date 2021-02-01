@@ -16,7 +16,7 @@ const post = async (url, action, form) => {
             }
         })
         .then((info) => {
-            return CFG.handleStatus(info, action(info.data.data))
+            return CFG.handleStatus(info, action(info.data))
         })
         .catch((err) => {
             console.error(err)
