@@ -1,6 +1,14 @@
 FROM node:alpine as builder
 WORKDIR /app
 COPY . ./
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.5 \
+    python3-pip \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN yarn install
 
 #ARG REACT_APP_KEYCLOAK_REALM
