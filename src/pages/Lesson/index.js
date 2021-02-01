@@ -15,8 +15,8 @@ class Lesson extends React.Component {
         let {leftMenu} = this.state;
 
         const {name, module, lesson} = this.props.match.params;
-        leftMenu = await database.get('lessons/get-by/' + module)
-        const object = await database.get('lessons/get/' + lesson)
+        leftMenu = await database.get('courses/' + name + "/modules/" + module + "/lessons")
+        const object = await database.get('courses/' + name + "/modules/" + module + "/lesson/" + lesson)
 
         for (let i in leftMenu) {
             leftMenu[i].to = `/courses/${name}/${module}/${leftMenu[i].id}`
