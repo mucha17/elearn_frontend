@@ -15,7 +15,7 @@ class Module extends React.Component {
         let {lessons, leftMenu} = this.state;
 
         const {name, module} = this.props.match.params;
-        lessons = await database.get('lessons/get-by/' + module)
+        lessons = await database.get('courses/' + name + "/modules/" + module + "/lessons")
         leftMenu = lessons;
 
         for (let i in leftMenu) {
